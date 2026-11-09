@@ -1,7 +1,7 @@
 """Offline tests: simulate a game with fake Kalshi + ESPN snapshots."""
 from datetime import date
 
-from bot import espn, kalshi, notify, strategy
+from bot import config, espn, kalshi, notify, strategy
 
 EVENT = "KXNBAGAME-26NOV09NYKBOS"
 
@@ -50,7 +50,7 @@ def test_early_dip_buy_and_win():
     assert len(out) == 1 and out[0]["bucket"] == "early" and out[0]["entry"] == 0.56
     assert strategy.step(s, mkts(40, 42), game("in", 2, 40, 60)) == []   # only one trade per game
     done = strategy.settle(s, {"401": "BOS"})
-    assert done[0]["won"] and done[0]["pnl"] == round(10 - (5.60 + strategy.taker_fee(10, 0.56)), 2)
+    assert done[0]["won"] and done[0]["pnl"] == round(config.CONTRACTS * (1 - 0.56) - strategy.taker_fee(config.CONTRACTS, 0.56), 2)
     msg = notify.summary_msg(s, done, "test")
     assert "Early dips" in msg and "+$" in msg
 
