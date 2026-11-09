@@ -13,8 +13,8 @@ from .strategy import totals
 
 
 def send(text: str) -> bool:
-    token = os.getenv("UPDATES_TELEGRAM_BOT_TOKEN")
-    chat = os.getenv("UPDATES_TELEGRAM_CHAT_ID")
+    token = (os.getenv("UPDATES_TELEGRAM_BOT_TOKEN") or "").strip()
+    chat = (os.getenv("UPDATES_TELEGRAM_CHAT_ID") or "").strip()
     if not (token and chat):
         print("[telegram not configured]\n" + text)
         return False
