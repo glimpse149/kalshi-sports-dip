@@ -15,7 +15,7 @@ Kalshi prices and ESPN live scores, logs simulated trades, and reports to the
 |---|---|
 | Pre-game | Records each team's last price before tip. Games already started when the bot came online are skipped. |
 | Favorite | The team at 75¢+ at tip. |
-| Early dip (the strategy) | In Q1–Q2, favorite's ask is 25¢+ below its pre-game price → paper-buy 10 contracts at the ask, with the Kalshi taker fee. |
+| Early dip (the strategy) | In Q1–Q2, favorite's ask is 25¢+ below its pre-game price → paper-buy 50 contracts at the ask, with the Kalshi taker fee. |
 | Late dip (control group) | Same rule in Q3+. Logged separately so you can compare. Research suggests late moves tend to keep going. |
 | Filters | Skips prices under 5¢ and spreads wider than 6¢. One trade per game. |
 | Exit | Held to the final buzzer: $1/contract if the team wins, $0 if not. |

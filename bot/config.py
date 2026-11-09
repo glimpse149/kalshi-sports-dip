@@ -11,7 +11,7 @@ EARLY_MAX_PERIOD = 2          # "early" = 1st half (Q1-Q2): this is the strategy
                               # dips in Q3+ are logged as a "late" control group for comparison
 
 # --- Size and costs (paper) --------------------------------------------------
-CONTRACTS = 10                # contracts per paper trade
+CONTRACTS = 50                # contracts per paper trade
 TAKER_FEE_RATE = 0.07         # Kalshi taker fee: 0.07 x C x P x (1-P), rounded up to the cent
                               # paper fills assume we pay the ask (taker) -> conservative
 
