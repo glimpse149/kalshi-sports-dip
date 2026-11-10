@@ -1,5 +1,14 @@
 {
- "games": {},
+ "games": {
+  "KXNBAGAME-26NOV09NOPGSW": {
+   "pregame": {},
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401909959",
+   "date": "2026-11-09"
+  }
+ },
  "open": [],
  "closed": []
 }
