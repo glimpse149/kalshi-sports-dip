@@ -7,6 +7,52 @@
    "entered": [],
    "espn_id": "401909959",
    "date": "2026-11-09"
+  },
+  "KXNBAGAME-26NOV10LACPHX": {
+   "pregame": {},
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401909962",
+   "date": "2026-11-10"
+  },
+  "KXNBAGAME-26NOV10MIAUTA": {
+   "pregame": {},
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401909963",
+   "date": "2026-11-10"
+  },
+  "KXNBAGAME-26NOV10BOSPHI": {
+   "pregame": {},
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401909961",
+   "date": "2026-11-10"
+  },
+  "KXNBAGAME-26NOV10ORLSAC": {
+   "pregame": {
+    "SAC": 0.345,
+    "ORL": 0.655
+   },
+   "favorite": "",
+   "fav_pregame": 0.655,
+   "entered": [],
+   "espn_id": "401909964",
+   "date": "2026-11-10"
+  },
+  "KXNBAGAME-26NOV10OKCPOR": {
+   "pregame": {
+    "POR": 0.485,
+    "OKC": 0.515
+   },
+   "favorite": "",
+   "fav_pregame": 0.515,
+   "entered": [],
+   "espn_id": "401909965",
+   "date": "2026-11-10"
   }
  },
  "open": [],
