@@ -6,3 +6,5 @@ date,fav,opp,fav_pre,entry,fee,cost,bucket,minute,won,pnl
 2026-10-28,SAS,UTA,0.845,0.57,0.86,29.36,late,96,True,20.64
 2026-11-02,NYK,BKN,0.875,0.6,0.84,30.84,late,113,True,19.16
 2026-11-04,BOS,MIL,0.845,0.58,0.86,29.86,late,108,True,20.14
+2026-11-04,SAS,DAL,0.825,0.57,0.86,29.36,late,143,True,20.64
+2026-11-11,SAS,CHI,0.905,0.6,0.84,30.84,early,29,True,19.16
