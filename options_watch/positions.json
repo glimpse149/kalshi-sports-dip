@@ -1,0 +1,26 @@
+[
+  {
+    "name": "FSLY $20 Call",
+    "ticker": "FSLY",
+    "strike": 20,
+    "expiry": "2027-01-15",
+    "contracts": 5,
+    "entry": 0.95,
+    "take_profit": 1.90,
+    "cut_loss": 0.475,
+    "exit_by": "2026-12-28",
+    "note": "Tip: FSLY Jan calls, strike $25 or lower, closer is better"
+  },
+  {
+    "name": "SKM $40 Call",
+    "ticker": "SKM",
+    "strike": 40,
+    "expiry": "2026-12-18",
+    "contracts": 5,
+    "entry": 0.50,
+    "take_profit": 1.00,
+    "cut_loss": 0.25,
+    "exit_by": "2026-12-04",
+    "note": "Tip: SKM Dec 40c, buy under $0.50; Anthropic IPO stake play (same idea as ZM)"
+  }
+]

@@ -57,3 +57,13 @@ python -m bot settle
 - Late West Coast games may end after the live run stops; the morning settle run catches them,
   but late-game (control) dips after ~12:20am ET are missed.
 - GitHub's scheduler can start runs 5–20 minutes late.
+
+## Weekly options check (separate from the Kalshi bot)
+
+`options_watch/` sends a Monday ~10:47am ET message to the same *updates* Telegram bot
+on the Robinhood option positions listed in `options_watch/positions.json`
+(currently FSLY $20 Call Jan 15 and SKM $40 Call Dec 18): stock price and weekly change,
+option value vs what was paid, breakeven, days left, and flags when the take-profit,
+cut-loss or planned exit date is reached. Quotes come from Yahoo Finance.
+Edit `positions.json` to change fill prices, contracts or add/remove trades.
+Workflow: `.github/workflows/options-weekly.yml` (can also be run by hand from the Actions tab).

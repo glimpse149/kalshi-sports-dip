@@ -1,0 +1,32 @@
+name: options weekly check (FSLY + SKM)
+
+on:
+  schedule:
+    - cron: "47 15 * * 1"     # Mondays ~10:47am ET (11:47am during daylight time), after the open
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests yfinance
+      - name: Check positions and send to Telegram
+        env:
+          UPDATES_TELEGRAM_BOT_TOKEN: ${{ secrets.UPDATES_TELEGRAM_BOT_TOKEN }}
+          UPDATES_TELEGRAM_CHAT_ID: ${{ secrets.UPDATES_TELEGRAM_CHAT_ID }}
+        run: python -m options_watch.watch
+      - name: Save last week's values
+        if: always()
+        run: |
+          git config user.name "options-watch"
+          git config user.email "options-watch@users.noreply.github.com"
+          git add options_watch/state.json 2>/dev/null || true
+          git diff --cached --quiet || (git commit -m "options check $(date -u +%F)" && git pull --rebase && git push)
