@@ -1,0 +1,41 @@
+name: backtest
+
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "First date (YYYY-MM-DD)"
+        required: true
+        default: "2026-10-20"
+      end:
+        description: "Last date (YYYY-MM-DD)"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backtest
+  cancel-in-progress: false
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m bot.backtest fetch ${{ inputs.start }} ${{ inputs.end }}
+      - run: python -m bot.backtest report
+      - name: Save results
+        if: always()
+        run: |
+          git config user.name "dip-bot"
+          git config user.email "dip-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || (git commit -m "backtest ${{ inputs.start }}..${{ inputs.end }}" && git pull --rebase && git push)
