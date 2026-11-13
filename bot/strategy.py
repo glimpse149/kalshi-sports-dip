@@ -34,8 +34,13 @@ def _game_rec(state: dict, event: str) -> dict:
     })
 
 
-def step(state: dict, markets: list[dict], games: list[dict], now: datetime | None = None) -> list[dict]:
-    """Update state with one snapshot. Returns new paper entries (for alerts)."""
+def step(state: dict, markets: list[dict], games: list[dict], now: datetime | None = None,
+         pregame_lookup=None) -> list[dict]:
+    """Update state with one snapshot. Returns new paper entries (for alerts).
+
+    pregame_lookup(market, game) -> mid price at tip, used when the bot first sees a
+    game after it already started (so the favorite can still be identified).
+    """
     now = now or datetime.now(timezone.utc)
     by_event: dict[str, list[dict]] = {}
     for m in markets:
@@ -65,7 +70,26 @@ def step(state: dict, markets: list[dict], games: list[dict], now: datetime | No
         if game["state"] != "in":
             continue
 
-        # 2) at tip: lock the favorite (only if we actually saw a pre-game price)
+        # 2) missed tip? look up the pre-game price from Kalshi's price history
+        if (rec["favorite"] is None and not rec["pregame"] and pregame_lookup
+                and rec.get("lookup_tries", 0) < 5):
+            rec["lookup_tries"] = rec.get("lookup_tries", 0) + 1
+            for m in mkts:
+                code = team_code_in_game(m, game)
+                if not code:
+                    continue
+                try:
+                    p = pregame_lookup(m, game)
+                except Exception as e:
+                    print(f"[pregame lookup {m['ticker']}] {e}")
+                    p = None
+                if p is not None:
+                    rec["pregame"][code] = p
+            rec["pregame_source"] = "history"
+            if len(rec["pregame"]) < 2:      # couldn't get both sides: try again next loop
+                rec["pregame"] = {}
+
+        # 3) at tip: lock the favorite (only if we have a pre-game price)
         if rec["favorite"] is None and rec["pregame"]:
             fav, p = max(rec["pregame"].items(), key=lambda kv: kv[1])
             rec["favorite"] = fav if p >= config.FAVORITE_MIN_PREGAME else ""

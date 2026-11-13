@@ -39,6 +39,7 @@ def normalize_event(ev: dict) -> dict | None:
                 winner = code
         return {
             "id": ev.get("id"),
+            "start": ev.get("date") or comp.get("date") or "",   # scheduled tip, ISO UTC
             "teams": teams,
             "state": stype.get("state", ""),        # "pre" | "in" | "post"
             "completed": bool(stype.get("completed")),

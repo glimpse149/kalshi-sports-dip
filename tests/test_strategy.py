@@ -80,3 +80,46 @@ def test_wide_spread_skipped():
     s = strategy.new_state()
     strategy.step(s, mkts(84, 86), game("pre"))
     assert strategy.step(s, mkts(40, 55), game("in", 1, 10, 25)) == []
+
+
+def test_late_start_uses_price_history():
+    """Bot first sees the game in Q2: looks up tip-off prices, then trades the dip."""
+    s = strategy.new_state()
+    calls = []
+
+    def lookup(m, g):
+        calls.append(m["team"])
+        return {"BOS": 0.82, "NYK": 0.18}[m["team"]]
+
+    out = strategy.step(s, mkts(54, 56), game("in", 2, 40, 52), pregame_lookup=lookup)
+    assert sorted(calls) == ["BOS", "NYK"]
+    assert len(out) == 1 and out[0]["team"] == "BOS" and out[0]["pregame"] == 0.82
+    strategy.step(s, mkts(50, 52), game("in", 2, 40, 55), pregame_lookup=lookup)
+    assert len(calls) == 2            # no repeat lookups once the favorite is known
+
+
+def test_history_lookup_gives_up_after_5_tries():
+    s = strategy.new_state()
+    n = []
+    for _ in range(8):
+        strategy.step(s, mkts(54, 56), game("in", 1, 10, 20),
+                      pregame_lookup=lambda m, g: n.append(1) or None)
+    assert len(n) == 10              # 5 tries x 2 teams, then stops
+    assert s["open"] == []
+
+
+def test_candle_parsing(monkeypatch):
+    payload = {"candlesticks": [
+        {"end_period_ts": 100, "yes_bid": {"close_dollars": "0.80"}, "yes_ask": {"close_dollars": "0.82"}},
+        {"end_period_ts": 160, "yes_bid": {"close_dollars": "0.83"}, "yes_ask": {"close_dollars": "0.85"}},
+        {"end_period_ts": 999, "yes_bid": {"close_dollars": "0.10"}, "yes_ask": {"close_dollars": "0.12"}},
+    ]}
+
+    class R:
+        def raise_for_status(self): pass
+        def json(self): return payload
+
+    class S:
+        def get(self, *a, **k): return R()
+
+    assert kalshi.pregame_mid("X", 200, S()) == 0.84   # last candle at/before tip; ignores later ones

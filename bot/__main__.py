@@ -52,6 +52,11 @@ def et_today() -> date:
     return datetime.now(ET).date()
 
 
+def slate_date() -> date:
+    """Tonight's NBA slate. Before 6am ET we're still on last night's games."""
+    return (datetime.now(ET) - timedelta(hours=6)).date()
+
+
 def fetch_finals(dates: set[str], s: requests.Session) -> dict[str, str]:
     finals = {}
     for d in dates:
@@ -79,10 +84,17 @@ def live() -> None:
     s.headers["User-Agent"] = "kalshi-sports-dip/1.0 (paper trading research)"
     started = time.monotonic()
     errors = 0
-    print(f"live run start {datetime.now(ET):%Y-%m-%d %H:%M %Z}")
+    print(f"live run start {datetime.now(ET):%Y-%m-%d %H:%M %Z}, slate {slate_date()}")
 
-    # the slate we watch is fixed at start (run begins ~6:30pm ET), even after midnight
-    today = et_today()
+    # the slate we watch is fixed at start, even if the run goes past midnight
+    today = slate_date()
+
+    def lookup(market: dict, game: dict) -> float | None:
+        if not game.get("start"):
+            return None
+        ts = int(datetime.fromisoformat(game["start"].replace("Z", "+00:00")).timestamp())
+        return kalshi.pregame_mid(market["ticker"], ts, s)
+
     while (time.monotonic() - started) / 60 < config.MAX_RUN_MINUTES:
         try:
             games = espn.fetch_games(today, s)
@@ -96,7 +108,7 @@ def live() -> None:
             time.sleep(config.POLL_SECONDS)
             continue
 
-        for p in strategy.step(state, markets, games):
+        for p in strategy.step(state, markets, games, pregame_lookup=lookup):
             print("ENTRY", p)
             notify.send(notify.entry_msg(p))
         for p in settle_open(state, s):
@@ -118,12 +130,18 @@ def live() -> None:
 def settle_cmd() -> None:
     state = load()
     s = requests.Session()
-    settle_open(state, s)
+    newly = settle_open(state, s)
     # everything that closed in the last ~20h counts as "last night"
     cutoff = (datetime.now(timezone.utc) - timedelta(hours=20)).isoformat()
     recent = [p for p in state["closed"] if p.get("closed_at", "") >= cutoff]
     label = (et_today() - timedelta(days=1)).strftime("%a %b %-d")
-    notify.send(notify.summary_msg(state, recent, label))
+    # two settle runs are scheduled (GitHub runs late); only one summary per night,
+    # unless the second run settles something new
+    if state.get("last_summary") != label or newly:
+        notify.send(notify.summary_msg(state, recent, label))
+        state["last_summary"] = label
+    else:
+        print(f"summary for {label} already sent")
     save(state)
 
 

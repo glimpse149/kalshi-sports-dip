@@ -74,3 +74,36 @@ def fetch_markets(session: requests.Session | None = None) -> list[dict]:
         if not cursor:
             break
     return out
+
+
+def pregame_mid(ticker: str, start_ts: int, session: requests.Session | None = None) -> float | None:
+    """Mid price from the last 1-minute candle at or before scheduled tip-off.
+
+    Used when the bot comes online after a game has started (GitHub's scheduler
+    can start runs hours late), so we still know who the pre-game favorite was.
+    """
+    s = session or requests.Session()
+    r = s.get(
+        f"{config.KALSHI_API}/series/{config.KALSHI_SERIES}/markets/{ticker}/candlesticks",
+        params={"start_ts": start_ts - 3 * 3600, "end_ts": start_ts, "period_interval": 1},
+        timeout=20,
+    )
+    r.raise_for_status()
+    for c in reversed(r.json().get("candlesticks", [])):
+        if c.get("end_period_ts", 0) > start_ts:
+            continue
+        bid = _candle_close(c.get("yes_bid"))
+        ask = _candle_close(c.get("yes_ask"))
+        if bid is not None and ask is not None and 0 < ask <= 1 and ask >= bid:
+            return round((bid + ask) / 2, 4)
+    return None
+
+
+def _candle_close(side: dict | None) -> float | None:
+    if not side:
+        return None
+    v = side.get("close_dollars")
+    if v not in (None, ""):
+        return float(v)
+    v = side.get("close")
+    return float(v) / 100.0 if v not in (None, "") else None
