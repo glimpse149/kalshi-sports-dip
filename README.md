@@ -2,8 +2,8 @@
 
 Paper-trading bot that tests one question on Kalshi NBA game markets:
 
-> When a team priced **75¢+ before tip** falls behind **in the first half** and its price
-> drops **25¢ or more**, is it now underpriced?
+> When a team priced **70¢+ before tip** falls behind **in the first half** and its price
+> drops **15¢ or more**, is it now underpriced?
 
 **Paper only.** It never places orders and needs no Kalshi API key. It reads public
 Kalshi prices and ESPN live scores, logs simulated trades, and reports to the
@@ -14,14 +14,18 @@ Kalshi prices and ESPN live scores, logs simulated trades, and reports to the
 | Step | Rule |
 |---|---|
 | Pre-game | Records each team's last price before tip. Games already started when the bot came online are skipped. |
-| Favorite | The team at 75¢+ at tip. |
-| Early dip (the strategy) | In Q1–Q2, favorite's ask is 25¢+ below its pre-game price → paper-buy 50 contracts at the ask, with the Kalshi taker fee. |
+| Favorite | The team at 70¢+ at tip. |
+| Early dip (the strategy) | In Q1–Q2, favorite's ask is 15¢+ below its pre-game price → paper-buy 50 contracts at the ask, with the Kalshi taker fee. |
 | Late dip (control group) | Same rule in Q3+. Logged separately so you can compare. Research suggests late moves tend to keep going. |
 | Filters | Skips prices under 5¢ and spreads wider than 6¢. One trade per game. |
 | Exit | Held to the final buzzer: $1/contract if the team wins, $0 if not. |
 
 Fills assume paying the ask (taker) plus the fee, so results are on the conservative side.
 All thresholds live in `bot/config.py`.
+
+Rule chosen from the backtest (Oct 20 – Nov 12, 2026, 174 games): early dips at
+70¢/15¢ went 18/22 at an average 60¢ buy (+$216.81 at 50 contracts); late dips went 7/13 (−$35.00).
+Small sample — the live paper run is the real test.
 
 ## Schedule (GitHub Actions)
 
