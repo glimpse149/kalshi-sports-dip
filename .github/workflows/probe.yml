@@ -1,0 +1,29 @@
+name: probe (temporary)
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 - <<'PY'
+          import json, requests, time
+          K="https://api.elections.kalshi.com/trade-api/v2"
+          r=requests.get(f"{K}/markets",params={"event_ticker":"KXNBAGAME-26NOV12CHAPHX"},timeout=20)
+          ms=r.json().get("markets",[])
+          print("markets:",r.status_code,[ (m["ticker"],m.get("status"),m.get("result"),m.get("open_time"),m.get("close_time")) for m in ms])
+          print("market keys:",sorted(ms[0].keys()) if ms else None)
+          e=requests.get("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",params={"dates":"20261112"},timeout=20).json()
+          for ev in e["events"]:
+            print("espn", ev["id"], ev["date"], ev["shortName"])
+          start=[ev["date"] for ev in e["events"] if ev["id"]=="401909979"][0]
+          from datetime import datetime
+          ts=int(datetime.fromisoformat(start.replace("Z","+00:00")).timestamp())
+          for m in ms:
+            for path in [f"/series/KXNBAGAME/markets/{m['ticker']}/candlesticks"]:
+              c=requests.get(K+path,params={"start_ts":ts-3600,"end_ts":ts+600,"period_interval":1},timeout=20)
+              js=c.json()
+              cs=js.get("candlesticks",[])
+              print(path,c.status_code,len(cs))
+              if cs: print(json.dumps(cs[-15],indent=0)[:1500])
+              else: print(str(js)[:500])
+          PY
