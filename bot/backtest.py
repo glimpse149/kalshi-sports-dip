@@ -38,13 +38,13 @@ def iso_ts(s: str) -> int:
 
 
 def get(s: requests.Session, url: str, params: dict) -> dict:
-    for attempt in range(5):
+    for attempt in range(8):
         r = s.get(url, params=params, timeout=30)
         if r.status_code == 429 or r.status_code >= 500:
-            time.sleep(2 * (attempt + 1))
+            time.sleep(5 * (attempt + 1))
             continue
         r.raise_for_status()
-        time.sleep(0.12)
+        time.sleep(0.3)
         return r.json()
     r.raise_for_status()
     return {}
@@ -111,7 +111,8 @@ def fetch(start: date, end: date) -> None:
             continue
         n = 0
         for g in games:
-            if g["id"] in cache["games"] or not g["completed"] or stypes.get(g["id"]) not in (2, 3):
+            done = cache["games"].get(g["id"])
+            if (done and not done.get("skip", "").startswith("error")) or not g["completed"] or stypes.get(g["id"]) not in (2, 3):
                 continue
             rec = {"date": str(d), "teams": list(g["teams"]), "winner": g["winner"], "start": g["start"]}
             try:
