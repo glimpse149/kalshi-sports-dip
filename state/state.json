@@ -1,59 +1,5 @@
 {
  "games": {
-  "KXNBAGAME-26NOV09NOPGSW": {
-   "pregame": {},
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
-   "espn_id": "401909959",
-   "date": "2026-11-09"
-  },
-  "KXNBAGAME-26NOV10LACPHX": {
-   "pregame": {},
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
-   "espn_id": "401909962",
-   "date": "2026-11-10"
-  },
-  "KXNBAGAME-26NOV10MIAUTA": {
-   "pregame": {},
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
-   "espn_id": "401909963",
-   "date": "2026-11-10"
-  },
-  "KXNBAGAME-26NOV10BOSPHI": {
-   "pregame": {},
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
-   "espn_id": "401909961",
-   "date": "2026-11-10"
-  },
-  "KXNBAGAME-26NOV10ORLSAC": {
-   "pregame": {
-    "SAC": 0.345,
-    "ORL": 0.655
-   },
-   "favorite": "",
-   "fav_pregame": 0.655,
-   "entered": [],
-   "espn_id": "401909964",
-   "date": "2026-11-10"
-  },
-  "KXNBAGAME-26NOV10OKCPOR": {
-   "pregame": {
-    "POR": 0.485,
-    "OKC": 0.515
-   },
-   "favorite": "",
-   "fav_pregame": 0.515,
-   "entered": [],
-   "espn_id": "401909965",
-   "date": "2026-11-10"
-  },
   "KXNBAGAME-26NOV11OKCPOR": {
    "pregame": {},
    "favorite": null,
@@ -85,9 +31,157 @@
    "entered": [],
    "espn_id": "401909979",
    "date": "2026-11-12"
+  },
+  "KXNBAGAME-26NOV13UTAHOU": {
+   "pregame": {
+    "UTA": 0.085,
+    "HOU": 0.915
+   },
+   "favorite": "HOU",
+   "fav_pregame": 0.915,
+   "entered": [
+    "late"
+   ],
+   "espn_id": "401909301",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13GSWSAS": {
+   "pregame": {
+    "SAS": 0.855,
+    "GSW": 0.145
+   },
+   "favorite": "SAS",
+   "fav_pregame": 0.855,
+   "entered": [],
+   "espn_id": "401909302",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13MEMNOP": {
+   "pregame": {
+    "NOP": 0.395,
+    "MEM": 0.605
+   },
+   "favorite": "",
+   "fav_pregame": 0.605,
+   "entered": [],
+   "espn_id": "401909300",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13MILORL": {
+   "pregame": {
+    "ORL": 0.785,
+    "MIL": 0.215
+   },
+   "favorite": "ORL",
+   "fav_pregame": 0.785,
+   "entered": [],
+   "espn_id": "401909297",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13NYKIND": {
+   "pregame": {
+    "NYK": 0.725,
+    "IND": 0.275
+   },
+   "favorite": "NYK",
+   "fav_pregame": 0.725,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909296",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13PORSAC": {
+   "pregame": {
+    "SAC": 0.195,
+    "POR": 0.805
+   },
+   "favorite": "POR",
+   "fav_pregame": 0.805,
+   "entered": [],
+   "espn_id": "401909303",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13OKCLAC": {
+   "pregame": {
+    "OKC": 0.675,
+    "LAC": 0.325
+   },
+   "favorite": "",
+   "fav_pregame": 0.675,
+   "entered": [],
+   "espn_id": "401909304",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13CLEMIA": {
+   "pregame": {
+    "MIA": 0.565,
+    "CLE": 0.435
+   },
+   "favorite": "",
+   "fav_pregame": 0.565,
+   "entered": [],
+   "espn_id": "401909298",
+   "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV13ATLCHI": {
+   "pregame": {
+    "CHI": 0.315,
+    "ATL": 0.685
+   },
+   "favorite": "",
+   "fav_pregame": 0.685,
+   "entered": [],
+   "espn_id": "401909299",
+   "date": "2026-11-13"
   }
  },
  "open": [],
- "closed": [],
+ "closed": [
+  {
+   "event": "KXNBAGAME-26NOV13NYKIND",
+   "ticker": "KXNBAGAME-26NOV13NYKIND-NYK",
+   "date": "2026-11-13",
+   "espn_id": "401909296",
+   "team": "NYK",
+   "opponent": "IND",
+   "bucket": "early",
+   "pregame": 0.725,
+   "entry": 0.55,
+   "contracts": 50,
+   "fee": 0.87,
+   "cost": 28.37,
+   "period": 2,
+   "clock": "6:32",
+   "score": "NYK 35-42 IND",
+   "opened_at": "2026-11-14T00:59:03+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -28.37,
+   "closed_at": "2026-11-14T02:42:50+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV13UTAHOU",
+   "ticker": "KXNBAGAME-26NOV13UTAHOU-HOU",
+   "date": "2026-11-13",
+   "espn_id": "401909301",
+   "team": "HOU",
+   "opponent": "UTA",
+   "bucket": "late",
+   "pregame": 0.915,
+   "entry": 0.76,
+   "contracts": 50,
+   "fee": 0.64,
+   "cost": 38.64,
+   "period": 3,
+   "clock": "7:23",
+   "score": "HOU 72-69 UTA",
+   "opened_at": "2026-11-14T03:11:54+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 11.36,
+   "closed_at": "2026-11-14T04:11:35+00:00"
+  }
+ ],
  "last_summary": "Thu Nov 12"
 }

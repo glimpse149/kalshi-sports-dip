@@ -1,0 +1,3 @@
+date,team,opponent,bucket,pregame,entry,contracts,fee,cost,period,clock,score,won,payout,pnl,opened_at,closed_at,ticker
+2026-11-13,NYK,IND,early,0.725,0.55,50,0.87,28.37,2,6:32,NYK 35-42 IND,False,0.0,-28.37,2026-11-14T00:59:03+00:00,2026-11-14T02:42:50+00:00,KXNBAGAME-26NOV13NYKIND-NYK
+2026-11-13,HOU,UTA,late,0.915,0.76,50,0.64,38.64,3,7:23,HOU 72-69 UTA,True,50.0,11.36,2026-11-14T03:11:54+00:00,2026-11-14T04:11:35+00:00,KXNBAGAME-26NOV13UTAHOU-HOU
