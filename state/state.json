@@ -134,6 +134,65 @@
    "entered": [],
    "espn_id": "401909299",
    "date": "2026-11-13"
+  },
+  "KXNBAGAME-26NOV14CHIMIN": {
+   "pregame": {
+    "MIN": 0.885,
+    "CHI": 0.115
+   },
+   "favorite": "MIN",
+   "fav_pregame": 0.885,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909984",
+   "date": "2026-11-14"
+  },
+  "KXNBAGAME-26NOV14DALCLE": {
+   "pregame": {
+    "DAL": 0.775,
+    "CLE": 0.225
+   },
+   "favorite": "DAL",
+   "fav_pregame": 0.775,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909981",
+   "date": "2026-11-14"
+  },
+  "KXNBAGAME-26NOV14DETMIA": {
+   "pregame": {
+    "MIA": 0.405,
+    "DET": 0.595
+   },
+   "favorite": "",
+   "fav_pregame": 0.595,
+   "entered": [],
+   "espn_id": "401909982",
+   "date": "2026-11-14"
+  },
+  "KXNBAGAME-26NOV14BKNMEM": {
+   "pregame": {
+    "MEM": 0.615,
+    "BKN": 0.375
+   },
+   "favorite": "",
+   "fav_pregame": 0.615,
+   "entered": [],
+   "espn_id": "401909983",
+   "date": "2026-11-14"
+  },
+  "KXNBAGAME-26NOV14DENNOP": {
+   "pregame": {
+    "NOP": 0.155,
+    "DEN": 0.845
+   },
+   "favorite": "DEN",
+   "fav_pregame": 0.845,
+   "entered": [],
+   "espn_id": "401909980",
+   "date": "2026-11-14"
   }
  },
  "open": [],
@@ -181,6 +240,50 @@
    "payout": 50.0,
    "pnl": 11.36,
    "closed_at": "2026-11-14T04:11:35+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV14DALCLE",
+   "ticker": "KXNBAGAME-26NOV14DALCLE-DAL",
+   "date": "2026-11-14",
+   "espn_id": "401909981",
+   "team": "DAL",
+   "opponent": "CLE",
+   "bucket": "early",
+   "pregame": 0.775,
+   "entry": 0.58,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.86,
+   "period": 2,
+   "clock": "3:44",
+   "score": "DAL 46-52 CLE",
+   "opened_at": "2026-11-15T01:25:10+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -29.86,
+   "closed_at": "2026-11-15T03:00:59+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV14CHIMIN",
+   "ticker": "KXNBAGAME-26NOV14CHIMIN-MIN",
+   "date": "2026-11-14",
+   "espn_id": "401909984",
+   "team": "MIN",
+   "opponent": "CHI",
+   "bucket": "early",
+   "pregame": 0.885,
+   "entry": 0.72,
+   "contracts": 50,
+   "fee": 0.71,
+   "cost": 36.71,
+   "period": 1,
+   "clock": "4:22",
+   "score": "MIN 10-20 CHI",
+   "opened_at": "2026-11-15T01:25:10+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -36.71,
+   "closed_at": "2026-11-15T03:26:34+00:00"
   }
  ],
  "last_summary": "Fri Nov 13"
