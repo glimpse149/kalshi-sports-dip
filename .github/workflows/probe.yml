@@ -12,18 +12,22 @@ jobs:
           import requests
           from bot import espn, kalshi
           from bot.sports import SPORTS, scoreboard_url
-          sp = SPORTS["ncaaf"]; s = requests.Session()
-          mk = kalshi.fetch_markets(s, series=sp["series"])
-          d = date(2026,11,21)
-          games = espn.fetch_games(d, s, url=scoreboard_url(sp), params=sp["params"])
-          ev = {}
-          for m in mk:
-              if m["date"] == d: ev.setdefault(m["event"], []).append(m)
-          by = {}
-          for e, ms in ev.items():
-              g = espn.match_event(ms, games)
-              if g: by.setdefault(g["id"], []).append((e, [(m["team"], m["team_name"], espn.team_code_in_game(m, g)) for m in ms], {c: t["names"] for c, t in g["teams"].items()}))
-          for gid, lst in by.items():
-              if len(lst) > 1:
-                  for x in lst: print("DUP", gid, x)
+          for key, days in [("ncaaf", [17,18,19,20,21]), ("nba", [16,17])]:
+              sp = SPORTS[key]; s = requests.Session()
+              mk = kalshi.fetch_markets(s, series=sp["series"])
+              for dd in days:
+                  d = date(2026,11,dd)
+                  games = espn.fetch_games(d, s, url=scoreboard_url(sp), params=sp["params"])
+                  ev = {}
+                  for m in mk:
+                      if m["date"] == d: ev.setdefault(m["event"], []).append(m)
+                  got = espn.assign_events(ev, games)
+                  ids = {g["id"] for g in got.values()}
+                  missing = [" vs ".join(g["teams"]) for g in games if g["id"] not in ids]
+                  wrong = [(e, [m["team"] for m in ev[e]], list(g["teams"])) for e, g in got.items()
+                           if sorted(espn.team_code_in_game(m, g) for m in ev[e]) != sorted(g["teams"])]
+                  print(f"{key} {d}: ESPN games {len(games)}, matched {len(ids)} (unique), Kalshi events {len(ev)}; ESPN games with no market: {missing}; bad: {wrong}")
+              for e, g in list(espn.assign_events({m["event"]: [x for x in mk if x["event"] == m["event"]] for m in mk if m["date"] == date(2026,11,21)},
+                                espn.fetch_games(date(2026,11,21), s, url=scoreboard_url(sp), params=sp["params"])).items())[:0]:
+                  pass
           PY

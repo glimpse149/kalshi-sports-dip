@@ -71,30 +71,72 @@ def _names(t: dict) -> set[str]:
     return set(t.get("names") or []) | {norm(t.get("location", "")), norm(t.get("name", ""))} - {""}
 
 
-def team_code_in_game(market: dict, game: dict) -> str | None:
-    """Which team in this game a Kalshi market is for: code, then exact name, then unique prefix
-    (Kalshi "Central Connecticut St." vs ESPN "Central Connecticut")."""
-    if market["team"] in game["teams"]:
-        return market["team"]
+SUFFIXES = ("state", "st", "university", "univ")
+
+
+def _quality(market: dict, t: dict, code: str) -> int:
+    """2 = same code or exact name, 1 = safe prefix match, 0 = no match."""
+    if market["team"] == code:
+        return 2
     name = norm(market.get("team_name", ""))
     if not name:
-        return None
-    hits = [c for c, t in game["teams"].items() if name in _names(t)]
-    if len(hits) == 1:
-        return hits[0]
-    hits = [c for c, t in game["teams"].items()
-            if any(n.startswith(name) or name.startswith(n) for n in _names(t) if len(n) >= 4)]
+        return 0
+    names = _names(t)
+    if name in names:
+        return 2
+    for n in names:
+        if len(n) < 4:
+            continue
+        # Kalshi shortens ESPN's name: "Los Angeles R" vs "Los Angeles Rams"
+        if n.startswith(name) and len(name) >= 6:
+            return 1
+        # Kalshi adds only "St.": "Central Connecticut St." vs "Central Connecticut"
+        # (never "Texas Southern" vs "Texas")
+        if name.startswith(n) and name[len(n):] in SUFFIXES:
+            return 1
+    return 0
+
+
+def team_code_in_game(market: dict, game: dict) -> str | None:
+    """Which team in this game a Kalshi market is for (best unique match)."""
+    scored = [(_quality(market, t, c), c) for c, t in game["teams"].items()]
+    best = max((q for q, _ in scored), default=0)
+    hits = [c for q, c in scored if q == best and q > 0]
     return hits[0] if len(hits) == 1 else None
+
+
+def event_quality(markets: list[dict], game: dict) -> int:
+    """Sum of match quality if every market maps to a distinct team of this game, else 0."""
+    codes = [team_code_in_game(m, game) for m in markets]
+    if not all(codes) or len(set(codes)) != len(markets) or len(markets) < 2:
+        return 0
+    return sum(_quality(m, game["teams"][c], c) for m, c in zip(markets, codes))
 
 
 def match_event(markets: list[dict], games: list[dict]) -> dict | None:
     """The one game whose two teams the event's markets map onto (both of them, distinctly)."""
-    found = []
-    for g in games:
-        codes = [team_code_in_game(m, g) for m in markets]
-        if all(codes) and len(set(codes)) == len(markets) >= 2:
-            found.append(g)
+    found = [g for g in games if event_quality(markets, g)]
     return found[0] if len(found) == 1 else None
+
+
+def assign_events(events: dict[str, list[dict]], games: list[dict]) -> dict[str, dict]:
+    """event ticker -> game. If two events claim one game, keep only the better match
+    (and neither if they tie), so a market is never traded against the wrong game."""
+    claims: dict[str, list[tuple[int, str]]] = {}
+    out: dict[str, dict] = {}
+    for ev, mk in events.items():
+        g = match_event(mk, games)
+        if g:
+            claims.setdefault(g["id"], []).append((event_quality(mk, g), ev))
+            out[ev] = g
+    for gid, lst in claims.items():
+        if len(lst) > 1:
+            lst.sort(reverse=True)
+            keep = lst[0][1] if lst[0][0] > lst[1][0] else None
+            for _, ev in lst:
+                if ev != keep:
+                    out.pop(ev, None)
+    return out
 
 
 def match_game(market: dict, games: list[dict]) -> dict | None:

@@ -182,3 +182,28 @@ def test_cfb_messages():
     msg = notify.summary_msg({}, [], "Sat Nov 21", sections=[
         notify.summary_section(s, done, SPORTS["ncaaf"], "Q1")])
     assert "Early dips (Q1)" in msg and "✅ LIU won" in msg
+
+
+def _team(abbr, location, name):
+    return {"homeAway": "home", "score": "0",
+            "team": {"abbreviation": abbr, "location": location, "displayName": f"{location} {name}", "name": name}}
+
+
+def test_texas_southern_never_matches_texas():
+    g = espn.normalize_event({"id": "9", "competitions": [{"status": {"type": {"state": "pre"}},
+         "competitors": [_team("TEX", "Texas", "Longhorns"), _team("ARK", "Arkansas", "Razorbacks")]}]})
+    fcs = [kalshi.normalize_market({"ticker": "KXNCAAFGAME-26NOV21ARPBTXSO-TXSO", "yes_sub_title": "Texas Southern"}),
+           kalshi.normalize_market({"ticker": "KXNCAAFGAME-26NOV21ARPBTXSO-ARPB", "yes_sub_title": "Arkansas-Pine Bluff"})]
+    fbs = [kalshi.normalize_market({"ticker": "KXNCAAFGAME-26NOV21ARKTEX-TEX", "yes_sub_title": "Texas"}),
+           kalshi.normalize_market({"ticker": "KXNCAAFGAME-26NOV21ARKTEX-ARK", "yes_sub_title": "Arkansas"})]
+    assert espn.match_event(fcs, [g]) is None
+    got = espn.assign_events({"FCS": fcs, "FBS": fbs}, [g])
+    assert list(got) == ["FBS"]
+
+
+def test_two_events_tie_on_one_game_are_both_dropped():
+    g = espn.normalize_event({"id": "9", "competitions": [{"status": {"type": {"state": "pre"}},
+         "competitors": [_team("AAA", "Alpha", "A"), _team("BBB", "Bravo", "B")]}]})
+    e1 = [kalshi.normalize_market({"ticker": "X-26NOV21AB-AAA"}), kalshi.normalize_market({"ticker": "X-26NOV21AB-BBB"})]
+    e2 = [kalshi.normalize_market({"ticker": "Y-26NOV21AB-AAA"}), kalshi.normalize_market({"ticker": "Y-26NOV21AB-BBB"})]
+    assert espn.assign_events({"E1": e1, "E2": e2}, [g]) == {}

@@ -11,7 +11,7 @@ import math
 from datetime import datetime, timezone
 
 from . import config
-from .espn import match_event, team_code_in_game
+from .espn import assign_events, team_code_in_game
 
 
 def taker_fee(contracts: int, price: float) -> float:
@@ -47,8 +47,9 @@ def step(state: dict, markets: list[dict], games: list[dict], now: datetime | No
         by_event.setdefault(m["event"], []).append(m)
 
     entries = []
+    matched = assign_events(by_event, games)
     for event, mkts in by_event.items():
-        game = match_event(mkts, games)
+        game = matched.get(event)
         if not game:
             continue
         rec = _game_rec(state, event)
