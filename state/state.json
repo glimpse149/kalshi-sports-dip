@@ -1,13 +1,5 @@
 {
  "games": {
-  "KXNBAGAME-26NOV12CHAPHX": {
-   "pregame": {},
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
-   "espn_id": "401909979",
-   "date": "2026-11-12"
-  },
   "KXNBAGAME-26NOV13UTAHOU": {
    "pregame": {
     "UTA": 0.085,
