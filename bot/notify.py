@@ -39,11 +39,12 @@ def money(x: float) -> str:
     return f"{'+' if x > 0 else '−' if x < 0 else ''}${abs(x):.2f}"
 
 
-def entry_msg(p: dict) -> str:
+def entry_msg(p: dict, sport: dict | None = None) -> str:
     drop = p["pregame"] - p["entry"]
     tag = "DIP BUY" if p["bucket"] == "early" else "LATE DIP (control)"
+    sport = sport or {"emoji": "🏀", "name": "NBA"}
     return (
-        f"🏀 {tag} · paper\n"
+        f"{sport['emoji']} {sport['name']} {tag} · paper\n"
         f"{p['team']} vs {p['opponent']} — Q{p['period']} {p['clock']}, {p['score']}\n"
         f"{p['team']} was {c(p['pregame'])} pre-game, now {c(p['entry'])} (−${drop:.2f}/contract)\n"
         f"Bought {p['contracts']} @ {c(p['entry'])} = ${p['cost']:.2f} incl. ${p['fee']:.2f} fee\n"
@@ -51,23 +52,23 @@ def entry_msg(p: dict) -> str:
     )
 
 
-def settle_msg(p: dict) -> str:
+def settle_msg(p: dict, sport: dict | None = None) -> str:
     icon = "✅" if p["won"] else "❌"
     result = "won" if p["won"] else "lost"
-    return f"{icon} {p['team']} {result} vs {p['opponent']} · {money(p['pnl'])} ({p['bucket']}, bought @ {c(p['entry'])})"
+    pre = f"{sport['emoji']} " if sport else ""
+    return f"{pre}{icon} {p['team']} {result} vs {p['opponent']} · {money(p['pnl'])} ({p['bucket']}, bought @ {c(p['entry'])})"
 
 
-def summary_msg(state: dict, settled_today: list[dict], label: str) -> str:
-    lines = [f"📊 Favorite-dip paper bot — {label}"]
+def summary_section(state: dict, settled_today: list[dict], sport: dict, early_label: str) -> list[str]:
+    lines = [f"{sport['emoji']} {sport['name']}"]
     if settled_today:
-        lines.append("")
         lines += [settle_msg(p) for p in settled_today]
     else:
         lines.append("No trades settled.")
     if state["open"]:
-        lines.append(f"\nStill open: {', '.join(p['team'] for p in state['open'])}")
-    lines.append("\nAll-time:")
-    for b, name in [("early", "Early dips (strategy)"), ("late", "Late dips (control)")]:
+        lines.append(f"Still open: {', '.join(p['team'] for p in state['open'])}")
+    lines.append("All-time:")
+    for b, name in [("early", f"Early dips ({early_label})"), ("late", "Later dips (control)")]:
         t = totals(state["closed"], b)
         if t["n"]:
             lines.append(
@@ -76,4 +77,14 @@ def summary_msg(state: dict, settled_today: list[dict], label: str) -> str:
             )
         else:
             lines.append(f"• {name}: no trades yet")
-    return "\n".join(lines)
+    return lines
+
+
+def summary_msg(state: dict, settled_today: list[dict], label: str, sections: list[list[str]] | None = None) -> str:
+    """sections: pre-built per-sport blocks. Without them, a single NBA block (old behavior)."""
+    if sections is None:
+        sections = [summary_section(state, settled_today, {"emoji": "🏀", "name": "NBA"}, "strategy")]
+    out = [f"📊 Favorite-dip paper bot — {label}"]
+    for sec in sections:
+        out += [""] + sec
+    return "\n".join(out)

@@ -123,3 +123,62 @@ def test_candle_parsing(monkeypatch):
         def get(self, *a, **k): return R()
 
     assert kalshi.pregame_mid("X", 200, S()) == 0.84   # last candle at/before tip; ignores later ones
+
+
+# ---------------- college football: names differ between Kalshi and ESPN, Q1-only rule
+CFB = "KXNCAAFGAME-26NOV21CCSULIU"
+
+
+def cfb_mkts(liu_bid, liu_ask):
+    raw = [
+        {"ticker": f"{CFB}-LIU", "event_ticker": CFB, "yes_sub_title": "LIU",
+         "yes_bid": liu_bid, "yes_ask": liu_ask},
+        {"ticker": f"{CFB}-CCSU", "event_ticker": CFB, "yes_sub_title": "Central Connecticut St.",
+         "yes_bid": 100 - liu_ask, "yes_ask": 100 - liu_bid},
+    ]
+    return [kalshi.normalize_market(m) for m in raw]
+
+
+def cfb_game(state, period=0, liu=0, ccsu=0):
+    ev = {"id": "501", "date": "2026-11-21T17:00Z", "competitions": [{
+        "status": {"period": period, "displayClock": "8:00",
+                   "type": {"state": state, "completed": state == "post"}},
+        "competitors": [
+            {"homeAway": "home", "score": str(liu),
+             "team": {"abbreviation": "LIU", "location": "Long Island University", "displayName": "Long Island University Sharks",
+                      "shortDisplayName": "LIU", "name": "Sharks"}},
+            {"homeAway": "away", "score": str(ccsu),
+             "team": {"abbreviation": "CCSU", "location": "Central Connecticut", "displayName": "Central Connecticut Blue Devils",
+                      "shortDisplayName": "C Conn", "name": "Blue Devils"}},
+        ]}]}
+    other = {"id": "502", "competitions": [{"status": {"period": 0, "type": {"state": "pre"}}, "competitors": [
+        {"homeAway": "home", "score": "0", "team": {"abbreviation": "UCONN", "location": "UConn", "name": "Huskies"}},
+        {"homeAway": "away", "score": "0", "team": {"abbreviation": "CONN", "location": "Connecticut College", "name": "Camels"}}]}]}
+    return [espn.normalize_event(ev), espn.normalize_event(other)]
+
+
+def test_cfb_name_matching_and_q1_only():
+    s = strategy.new_state()
+    strategy.step(s, cfb_mkts(79, 81), cfb_game("pre"), early_periods=1)
+    assert s["games"][CFB]["pregame"] == {"LIU": 0.8, "CCSU": 0.2}
+    out = strategy.step(s, cfb_mkts(62, 64), cfb_game("in", 1, 0, 7), early_periods=1)
+    assert len(out) == 1 and out[0]["team"] == "LIU" and out[0]["bucket"] == "early"
+
+
+def test_cfb_q2_dip_is_control():
+    s = strategy.new_state()
+    strategy.step(s, cfb_mkts(79, 81), cfb_game("pre"), early_periods=1)
+    out = strategy.step(s, cfb_mkts(62, 64), cfb_game("in", 2, 0, 14), early_periods=1)
+    assert out[0]["bucket"] == "late"
+
+
+def test_cfb_messages():
+    from bot.sports import SPORTS
+    s = strategy.new_state()
+    strategy.step(s, cfb_mkts(79, 81), cfb_game("pre"), early_periods=1)
+    p = strategy.step(s, cfb_mkts(62, 64), cfb_game("in", 1, 0, 7), early_periods=1)[0]
+    assert notify.entry_msg(p, SPORTS["ncaaf"]).startswith("🏈 College football")
+    done = strategy.settle(s, {"501": "LIU"})
+    msg = notify.summary_msg({}, [], "Sat Nov 21", sections=[
+        notify.summary_section(s, done, SPORTS["ncaaf"], "Q1")])
+    assert "Early dips (Q1)" in msg and "✅ LIU won" in msg

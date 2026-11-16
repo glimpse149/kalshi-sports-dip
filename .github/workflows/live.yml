@@ -1,20 +1,28 @@
-name: live (NBA games)
+name: live
 
 on:
   schedule:
-    # GitHub often starts scheduled runs hours late, so fire hourly from ~4pm to ~10pm ET.
-    # Only one run is active at a time (concurrency below); extra ones queue, start when the
-    # previous run ends, and exit within a minute once the night's games are final.
+    # NBA backup: GitHub often starts scheduled runs hours late, so fire hourly ~4pm-10pm ET.
+    # (cron-job.org starts NBA at 6:30pm and college football at 11:30am, on time.)
     - cron: "7 21,22,23 * * *"
     - cron: "7 0,1,2,3 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: "nba or ncaaf"
+        required: false
+        default: "nba"
 
 permissions:
   contents: write
+  actions: write            # lets a run start the next one when games outlast 6 hours
 
 concurrency:
-  group: bot-state
+  group: live-${{ inputs.sport || 'nba' }}
   cancel-in-progress: false
+
+env:
+  SPORT: ${{ inputs.sport || 'nba' }}
 
 jobs:
   live:
@@ -29,14 +37,23 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - name: Watch games (paper only)
+        id: run
         env:
           UPDATES_TELEGRAM_BOT_TOKEN: ${{ secrets.UPDATES_TELEGRAM_BOT_TOKEN }}
           UPDATES_TELEGRAM_CHAT_ID: ${{ secrets.UPDATES_TELEGRAM_CHAT_ID }}
-        run: python -m bot live
+        run: python -m bot live "$SPORT"
       - name: Save state
         if: always()
         run: |
           git config user.name "dip-bot"
           git config user.email "dip-bot@users.noreply.github.com"
           git add state data
-          git diff --cached --quiet || (git commit -m "live run $(date -u +%F)" && git pull --rebase && git push)
+          git diff --cached --quiet && exit 0
+          git commit -m "live run $SPORT $(date -u +%F)"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep $((RANDOM % 10 + 5)); done
+          exit 1
+      - name: Keep going (games still on)
+        if: steps.run.outputs.continue == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/live.yml/dispatches -f ref=main -f "inputs[sport]=$SPORT"

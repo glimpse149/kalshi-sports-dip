@@ -12,7 +12,7 @@ MONTHS = {m: i for i, m in enumerate(
     ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], 1)}
 
 # KXNBAGAME-26NOV09LALBOS  ->  date 2026-11-09, teams "LALBOS"
-EVENT_RE = re.compile(r"^[A-Z]+-(\d{2})([A-Z]{3})(\d{2})([A-Z]+)$")
+EVENT_RE = re.compile(r"^[A-Z0-9]+-(\d{2})([A-Z]{3})(\d{2})(\w+)$")
 
 
 def _price(m: dict, key: str) -> float | None:
@@ -58,25 +58,26 @@ def normalize_market(m: dict) -> dict:
     }
 
 
-def fetch_markets(session: requests.Session | None = None) -> list[dict]:
-    """All open NBA game-winner markets, normalized."""
+def fetch_markets(session: requests.Session | None = None, series: str = config.KALSHI_SERIES) -> list[dict]:
+    """All open game-winner markets of a series (default NBA), normalized. Tie markets dropped."""
     s = session or requests.Session()
     out, cursor = [], None
     for _ in range(10):  # pagination guard
-        params = {"series_ticker": config.KALSHI_SERIES, "status": "open", "limit": 200}
+        params = {"series_ticker": series, "status": "open", "limit": 200}
         if cursor:
             params["cursor"] = cursor
         r = s.get(f"{config.KALSHI_API}/markets", params=params, timeout=20)
         r.raise_for_status()
         js = r.json()
-        out += [normalize_market(m) for m in js.get("markets", [])]
+        out += [normalize_market(m) for m in js.get("markets", []) if not m.get("ticker", "").endswith("-TIE")]
         cursor = js.get("cursor")
         if not cursor:
             break
     return out
 
 
-def pregame_mid(ticker: str, start_ts: int, session: requests.Session | None = None) -> float | None:
+def pregame_mid(ticker: str, start_ts: int, session: requests.Session | None = None,
+                series: str = config.KALSHI_SERIES) -> float | None:
     """Mid price from the last 1-minute candle at or before scheduled tip-off.
 
     Used when the bot comes online after a game has started (GitHub's scheduler
@@ -84,7 +85,7 @@ def pregame_mid(ticker: str, start_ts: int, session: requests.Session | None = N
     """
     s = session or requests.Session()
     r = s.get(
-        f"{config.KALSHI_API}/series/{config.KALSHI_SERIES}/markets/{ticker}/candlesticks",
+        f"{config.KALSHI_API}/series/{series}/markets/{ticker}/candlesticks",
         params={"start_ts": start_ts - 3 * 3600, "end_ts": start_ts, "period_interval": 1},
         timeout=20,
     )

@@ -1,5 +1,8 @@
 # kalshi-sports-dip
 
+Sports covered (paper): **NBA** (buys dips in Q1–Q2) and **college football FBS** (buys dips in Q1 only).
+See `data/backtest/` for the per-sport backtests behind those choices.
+
 Paper-trading bot that tests one question on Kalshi NBA game markets:
 
 > When a team priced **70¢+ before tip** falls behind **in the first half** and its price

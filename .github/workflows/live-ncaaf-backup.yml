@@ -1,0 +1,18 @@
+name: live college football (backup start)
+
+# cron-job.org is the main trigger (daily ~11:30am ET). This is a backup in case it misses:
+# GitHub may start it late, and if a college football run is already going it just queues.
+on:
+  schedule:
+    - cron: "37 16 * * 6"     # Saturdays ~11:37am ET
+
+permissions:
+  actions: write
+
+jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST repos/${{ github.repository }}/actions/workflows/live.yml/dispatches -f ref=main -f "inputs[sport]=ncaaf"

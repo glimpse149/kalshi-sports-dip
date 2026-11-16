@@ -11,7 +11,7 @@ import math
 from datetime import datetime, timezone
 
 from . import config
-from .espn import match_game, team_code_in_game
+from .espn import match_event, team_code_in_game
 
 
 def taker_fee(contracts: int, price: float) -> float:
@@ -35,7 +35,7 @@ def _game_rec(state: dict, event: str) -> dict:
 
 
 def step(state: dict, markets: list[dict], games: list[dict], now: datetime | None = None,
-         pregame_lookup=None) -> list[dict]:
+         pregame_lookup=None, early_periods: int = config.EARLY_MAX_PERIOD) -> list[dict]:
     """Update state with one snapshot. Returns new paper entries (for alerts).
 
     pregame_lookup(market, game) -> mid price at tip, used when the bot first sees a
@@ -48,11 +48,7 @@ def step(state: dict, markets: list[dict], games: list[dict], now: datetime | No
 
     entries = []
     for event, mkts in by_event.items():
-        game = None
-        for m in mkts:
-            game = match_game(m, games)
-            if game:
-                break
+        game = match_event(mkts, games)
         if not game:
             continue
         rec = _game_rec(state, event)
@@ -102,7 +98,7 @@ def step(state: dict, markets: list[dict], games: list[dict], now: datetime | No
         if not mkt or mkt["ask"] is None or mkt["bid"] is None:
             continue
 
-        bucket = "early" if game["period"] <= config.EARLY_MAX_PERIOD else "late"
+        bucket = "early" if game["period"] <= early_periods else "late"
         if rec["entered"]:          # one paper trade per game: early, or late as control
             continue
 
