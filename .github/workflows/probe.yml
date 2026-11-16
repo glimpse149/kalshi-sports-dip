@@ -8,24 +8,22 @@ jobs:
       - run: pip install -q -r requirements.txt
       - run: |
           python3 - <<'PY'
-          from datetime import date, timedelta
+          from datetime import date
           import requests
           from bot import espn, kalshi
           from bot.sports import SPORTS, scoreboard_url
           sp = SPORTS["ncaaf"]; s = requests.Session()
           mk = kalshi.fetch_markets(s, series=sp["series"])
-          print("open Kalshi CFB markets:", len(mk))
-          for d in [date(2026,11,17), date(2026,11,18), date(2026,11,19), date(2026,11,20), date(2026,11,21)]:
-              games = espn.fetch_games(d, s, url=scoreboard_url(sp), params=sp["params"])
-              ev = {}
-              for m in mk:
-                  if m["date"] == d: ev.setdefault(m["event"], []).append(m)
-              ok, miss = 0, []
-              for e, ms in ev.items():
-                  g = espn.match_event(ms, games)
-                  if g: ok += 1
-                  else: miss.append((e, [m["team_name"] for m in ms]))
-              unmatched_games = len(games) - ok
-              print(f"{d}: ESPN FBS games {len(games)}, Kalshi events {len(ev)}, matched {ok}")
-              for x in miss[:12]: print("   no ESPN match:", x)
+          d = date(2026,11,21)
+          games = espn.fetch_games(d, s, url=scoreboard_url(sp), params=sp["params"])
+          ev = {}
+          for m in mk:
+              if m["date"] == d: ev.setdefault(m["event"], []).append(m)
+          by = {}
+          for e, ms in ev.items():
+              g = espn.match_event(ms, games)
+              if g: by.setdefault(g["id"], []).append((e, [(m["team"], m["team_name"], espn.team_code_in_game(m, g)) for m in ms], {c: t["names"] for c, t in g["teams"].items()}))
+          for gid, lst in by.items():
+              if len(lst) > 1:
+                  for x in lst: print("DUP", gid, x)
           PY
