@@ -1,20 +1,22 @@
-"""Replay the favorite-dip rule on past NBA games.
+"""Replay the favorite-dip rule on past games, for any sport in bot/sports.py.
 
 Data:
-  * ESPN scoreboard -> games, scheduled start, winner
-  * ESPN summary play-by-play -> real tip-off time, start of Q3, final play
-  * Kalshi 1-minute candlesticks -> favorite's bid/ask through the game
+  * ESPN scoreboard -> games and winners
+  * ESPN summary play-by-play -> real start time, when each period began, final play
+  * Kalshi events -> which game-winner markets belong to which game
+  * Kalshi 1-minute candlesticks -> the favorite's bid/ask through the game
 
-  python -m bot.backtest fetch 2026-10-20 2026-11-12   # download into data/backtest_cache.json
-  python -m bot.backtest report                         # simulate + write data/backtest_report.md
+  python -m bot.backtest fetch nfl 2026-09-09 2026-11-15   # -> data/backtest/nfl_cache.json
+  python -m bot.backtest report nfl                        # -> data/backtest/nfl_report.md
+  python -m bot.backtest summary                           # one table across all sports
 
 Limits: one-minute candle closes, not tick-by-tick quotes, so entries are approximate.
 Paper fills assume paying the ask plus the taker fee, same as the live bot.
 """
 from __future__ import annotations
 
-import csv
 import json
+import re
 import sys
 import time
 from datetime import date, datetime, timedelta
@@ -22,13 +24,17 @@ from pathlib import Path
 
 import requests
 
-from . import config, espn, kalshi, strategy
+from . import config, kalshi, strategy
+from .sports import ESPN_BASE, SPORTS
 
 ROOT = Path(__file__).resolve().parent.parent
-CACHE = ROOT / "data" / "backtest_cache.json"
-REPORT = ROOT / "data" / "backtest_report.md"
-TRADES = ROOT / "data" / "backtest_trades.csv"
-SUMMARY_URL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary"
+OUT = ROOT / "data" / "backtest"
+MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+EVENT_DATE = re.compile(r"-(\d{2})([A-Z]{3})(\d{2})")
+
+
+def cache_path(sport: str) -> Path:
+    return OUT / f"{sport}_cache.json"
 
 
 # ---------------------------------------------------------------- fetching
@@ -38,73 +44,161 @@ def iso_ts(s: str) -> int:
 
 
 def get(s: requests.Session, url: str, params: dict) -> dict:
+    r = None
     for attempt in range(8):
         r = s.get(url, params=params, timeout=30)
         if r.status_code == 429 or r.status_code >= 500:
             time.sleep(5 * (attempt + 1))
             continue
         r.raise_for_status()
-        time.sleep(0.3)
+        time.sleep(0.25)
         return r.json()
     r.raise_for_status()
     return {}
 
 
-def season_type(s: requests.Session, d: date) -> dict[str, int]:
-    js = get(s, config.ESPN_SCOREBOARD, {"dates": d.strftime("%Y%m%d")})
-    return {e["id"]: (e.get("season") or {}).get("type", 0) for e in js.get("events", [])}
+def norm(x: str) -> str:
+    x = (x or "").lower().replace("st.", "state").replace("&", "and")
+    return re.sub(r"[^a-z0-9]", "", x)
 
 
-def timing(s: requests.Session, espn_id: str) -> dict | None:
-    js = get(s, SUMMARY_URL, {"event": espn_id})
-    tip = q3 = last = None
-    for p in js.get("plays") or []:
+def event_date(ticker: str) -> str | None:
+    m = EVENT_DATE.search(ticker)
+    if not m or m.group(2) not in MONTHS:
+        return None
+    return f"20{m.group(1)}-{MONTHS.index(m.group(2)) + 1:02d}-{m.group(3)}"
+
+
+def kalshi_events(s: requests.Session, series: str, start: date, end: date) -> dict[str, list[dict]]:
+    """All game events of a series, grouped by date: {date: [{event, markets:[...]}]}."""
+    out: dict[str, list[dict]] = {}
+    cursor = None
+    for _ in range(200):
+        params = {"series_ticker": series, "limit": 200, "with_nested_markets": "true"}
+        if cursor:
+            params["cursor"] = cursor
+        js = get(s, f"{config.KALSHI_API}/events", params)
+        for ev in js.get("events", []):
+            d = event_date(ev.get("event_ticker", ""))
+            if not d or not (str(start) <= d <= str(end)):
+                continue
+            mk = [m for m in ev.get("markets") or [] if not m["ticker"].endswith("-TIE")]
+            out.setdefault(d, []).append({"event": ev["event_ticker"], "markets": [
+                {"ticker": m["ticker"], "code": m["ticker"].rsplit("-", 1)[-1],
+                 "name": m.get("yes_sub_title") or ""} for m in mk]})
+        cursor = js.get("cursor")
+        if not cursor:
+            break
+    return out
+
+
+def espn_games(s: requests.Session, sport: dict, d: date) -> list[dict]:
+    js = get(s, f"{ESPN_BASE}/{sport['espn']}/scoreboard", {"dates": d.strftime("%Y%m%d"), **sport["params"]})
+    games = []
+    for e in js.get("events", []):
+        try:
+            comp = e["competitions"][0]
+            st = comp["status"]["type"]
+            if not st.get("completed") or (e.get("season") or {}).get("type") not in (2, 3):
+                continue
+            teams, winner = {}, None
+            for c in comp["competitors"]:
+                t = c["team"]
+                code = t.get("abbreviation", "")
+                teams[code] = {"home": c.get("homeAway") == "home",
+                               "names": {norm(t.get(k, "")) for k in
+                                         ("location", "displayName", "shortDisplayName", "name", "nickname")} - {""}}
+                if c.get("winner") is True:
+                    winner = code
+            if len(teams) == 2 and winner:
+                games.append({"id": e["id"], "start": e.get("date", ""), "teams": teams, "winner": winner})
+        except (KeyError, IndexError, TypeError):
+            continue
+    return games
+
+
+ALIASES = {"GS": "GSW", "NY": "NYK", "SA": "SAS", "NO": "NOP", "UTAH": "UTA", "WSH": "WAS"}
+
+
+def match(game: dict, events: list[dict]) -> dict[str, str] | None:
+    """Map each ESPN team code -> Kalshi market ticker, or None if no event fits."""
+    for ev in events:
+        if len(ev["markets"]) != 2:
+            continue
+        assign = {}
+        for code, t in game["teams"].items():
+            hit = [m for m in ev["markets"]
+                   if m["code"] in (code, ALIASES.get(code, code))
+                   or norm(m["name"]) in t["names"]]
+            if len(hit) != 1:   # fall back to prefix: Kalshi "Los Angeles R" vs ESPN "Los Angeles Rams"
+                hit = [m for m in ev["markets"]
+                       if any(n.startswith(norm(m["name"])) or norm(m["name"]).startswith(n)
+                              for n in t["names"] if len(n) >= 4)]
+            if len(hit) == 1:
+                assign[code] = hit[0]["ticker"]
+        if len(assign) == 2 and len(set(assign.values())) == 2:
+            return assign
+    return None
+
+
+def timing(s: requests.Session, sport: dict, espn_id: str) -> dict | None:
+    js = get(s, f"{ESPN_BASE}/{sport['espn']}/summary", {"event": espn_id})
+    plays = js.get("plays") or []
+    if not plays and js.get("drives"):   # football keeps plays inside drives
+        plays = [p for dr in js["drives"].get("previous", []) for p in dr.get("plays", [])]
+    starts, last = {}, None
+    for p in plays:
         wc = p.get("wallclock")
         per = (p.get("period") or {}).get("number")
         if not wc or not per:
             continue
         t = iso_ts(wc)
-        tip = tip or t
-        if per >= 3 and q3 is None:
-            q3 = t
-        last = t
-    if tip and q3 and last:
-        return {"tip": tip, "q3": q3, "end": last}
+        starts.setdefault(str(per), t)
+        last = max(last or t, t)
+    if "1" in starts and len(starts) >= 2 and last:
+        return {"tip": starts["1"], "periods": starts, "end": last}
     return None
 
 
-def markets_for(s: requests.Session, d: date, teams: dict) -> list[dict]:
-    ymd = f"{d:%y}{d:%b}".upper() + f"{d:%d}"
-    away = next((c for c, t in teams.items() if not t["home"]), None)
-    home = next((c for c, t in teams.items() if t["home"]), None)
-    for a, b in ((away, home), (home, away)):
-        js = get(s, f"{config.KALSHI_API}/markets",
-                 {"event_ticker": f"{config.KALSHI_SERIES}-{ymd}{a}{b}"})
-        if js.get("markets"):
-            return js["markets"]
-    return []
-
-
-def candles(s: requests.Session, ticker: str, start: int, end: int) -> list[list]:
-    js = get(s, f"{config.KALSHI_API}/series/{config.KALSHI_SERIES}/markets/{ticker}/candlesticks",
-             {"start_ts": start, "end_ts": end, "period_interval": 1})
+def candles(s: requests.Session, series: str, ticker: str, start: int, end: int) -> list[list]:
     out = []
-    for c in js.get("candlesticks", []):
-        out.append([c.get("end_period_ts"),
-                    kalshi._candle_close(c.get("yes_bid")),
-                    kalshi._candle_close(c.get("yes_ask"))])
+    t0 = start
+    while t0 < end:                       # chunk long games (football runs 3.5h+)
+        t1 = min(end, t0 + 4 * 3600)
+        js = get(s, f"{config.KALSHI_API}/series/{series}/markets/{ticker}/candlesticks",
+                 {"start_ts": t0, "end_ts": t1, "period_interval": 1})
+        for c in js.get("candlesticks", []):
+            out.append([c.get("end_period_ts"),
+                        kalshi._candle_close(c.get("yes_bid")),
+                        kalshi._candle_close(c.get("yes_ask"))])
+        t0 = t1
     return out
 
 
-def fetch(start: date, end: date) -> None:
-    cache = json.loads(CACHE.read_text()) if CACHE.exists() else {"games": {}}
+def pregame_mid(s: requests.Session, series: str, ticker: str, ts: int) -> float | None:
+    js = get(s, f"{config.KALSHI_API}/series/{series}/markets/{ticker}/candlesticks",
+             {"start_ts": ts - 3 * 3600, "end_ts": ts, "period_interval": 1})
+    for c in reversed(js.get("candlesticks", [])):
+        if (c.get("end_period_ts") or 0) > ts:
+            continue
+        bid, ask = kalshi._candle_close(c.get("yes_bid")), kalshi._candle_close(c.get("yes_ask"))
+        if bid is not None and ask is not None and 0 < ask <= 1 and ask >= bid:
+            return round((bid + ask) / 2, 4)
+    return None
+
+
+def fetch(sport_key: str, start: date, end: date) -> None:
+    sport = SPORTS[sport_key]
+    path = cache_path(sport_key)
+    cache = json.loads(path.read_text()) if path.exists() else {"games": {}}
     s = requests.Session()
     s.headers["User-Agent"] = "kalshi-sports-dip/1.0 backtest"
+    events = kalshi_events(s, sport["series"], start - timedelta(days=1), end + timedelta(days=1))
+    print(f"{sport['name']}: {sum(len(v) for v in events.values())} Kalshi events in range")
     d = start
     while d <= end:
         try:
-            games = espn.fetch_games(d, s)
-            stypes = season_type(s, d)
+            games = espn_games(s, sport, d)
         except Exception as e:
             print(f"{d} scoreboard error: {e}")
             d += timedelta(days=1)
@@ -112,44 +206,56 @@ def fetch(start: date, end: date) -> None:
         n = 0
         for g in games:
             done = cache["games"].get(g["id"])
-            if (done and not done.get("skip", "").startswith("error")) or not g["completed"] or stypes.get(g["id"]) not in (2, 3):
+            if done and not done.get("skip", "").startswith("error"):
                 continue
             rec = {"date": str(d), "teams": list(g["teams"]), "winner": g["winner"], "start": g["start"]}
             try:
-                tm = timing(s, g["id"])
-                mk = markets_for(s, d, g["teams"])
-                if not tm or not mk:
-                    rec["skip"] = "no play timing" if not tm else "no Kalshi market"
+                # Kalshi dates its events in US time; late games can carry the next/previous day
+                cands = events.get(str(d), []) + events.get(str(d + timedelta(days=1)), []) \
+                    + events.get(str(d - timedelta(days=1)), [])
+                tickers = match(g, cands)
+                if not tickers:
+                    rec["skip"] = "no Kalshi market"
                 else:
-                    rec.update(tm)
-                    pre = {}
-                    for m in mk:
-                        code = espn.team_code_in_game(kalshi.normalize_market(m), g)
-                        if code:
-                            pre[code] = (m["ticker"], kalshi.pregame_mid(m["ticker"], tm["tip"], s))
-                    pre = {c: v for c, v in pre.items() if v[1] is not None}
-                    if len(pre) < 2:
-                        rec["skip"] = "no pre-game price"
+                    tm = timing(s, sport, g["id"])
+                    if not tm:
+                        rec["skip"] = "no play timing"
                     else:
-                        fav = max(pre, key=lambda c: pre[c][1])
-                        rec["fav"], rec["fav_pre"] = fav, pre[fav][1]
-                        if pre[fav][1] >= 0.60:   # keep candles only where a variant could trade
-                            rec["candles"] = candles(s, pre[fav][0], tm["tip"] - 60, tm["end"])
+                        rec.update(tm)
+                        pre = {c: pregame_mid(s, sport["series"], t, tm["tip"]) for c, t in tickers.items()}
+                        if any(v is None for v in pre.values()):
+                            rec["skip"] = "no pre-game price"
+                        else:
+                            fav = max(pre, key=pre.get)
+                            rec["fav"], rec["fav_pre"] = fav, pre[fav]
+                            if pre[fav] >= 0.60:
+                                rec["candles"] = candles(s, sport["series"], tickers[fav], tm["tip"] - 60, tm["end"])
             except Exception as e:
                 rec["skip"] = f"error: {e}"[:120]
             cache["games"][g["id"]] = rec
             n += 1
-        print(f"{d}: {n} games")
-        CACHE.parent.mkdir(parents=True, exist_ok=True)
-        CACHE.write_text(json.dumps(cache, separators=(",", ":")))
+        if n:
+            print(f"{d}: {n} games")
+            OUT.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(cache, separators=(",", ":")))
         d += timedelta(days=1)
+    OUT.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(cache, separators=(",", ":")))
 
 
 # ---------------------------------------------------------------- simulation
 
-def simulate(g: dict, dip: float, contracts: int = config.CONTRACTS,
+def period_at(g: dict, ts: int) -> int:
+    p = 1
+    for k, t in g["periods"].items():
+        if ts >= t:
+            p = max(p, int(k))
+    return p
+
+
+def simulate(g: dict, dip: float, early_periods: int = 2, contracts: int = config.CONTRACTS,
              min_entry: float = config.MIN_ENTRY_PRICE, max_spread: float = config.MAX_SPREAD) -> dict | None:
-    """First minute after tip where the favorite's ask is `dip` below its pre-game price."""
+    """First minute after the start where the favorite's ask is `dip` below its pre-game price."""
     target = g["fav_pre"] - dip
     for ts, bid, ask in g.get("candles", []):
         if ts is None or ts <= g["tip"] or ts > g["end"] or bid is None or ask is None:
@@ -160,10 +266,11 @@ def simulate(g: dict, dip: float, contracts: int = config.CONTRACTS,
             fee = strategy.taker_fee(contracts, ask)
             cost = round(ask * contracts + fee, 2)
             won = g["winner"] == g["fav"]
+            per = period_at(g, ts)
             return {"date": g["date"], "fav": g["fav"],
                     "opp": next(t for t in g["teams"] if t != g["fav"]),
                     "fav_pre": g["fav_pre"], "entry": ask, "fee": fee, "cost": cost,
-                    "bucket": "early" if ts < g["q3"] else "late",
+                    "period": per, "bucket": "early" if per <= early_periods else "late",
                     "minute": round((ts - g["tip"]) / 60), "won": won,
                     "pnl": round((contracts if won else 0) - cost, 2)}
     return None
@@ -174,96 +281,109 @@ def stats(rows: list[dict]) -> dict:
     staked = sum(r["cost"] for r in rows)
     pnl = sum(r["pnl"] for r in rows)
     wins = sum(r["won"] for r in rows)
+    avg = sum(r["entry"] for r in rows) / n if n else 0
     return {"n": n, "wins": wins, "pnl": round(pnl, 2), "staked": round(staked, 2),
-            "win_rate": wins / n if n else 0, "avg_entry": sum(r["entry"] for r in rows) / n if n else 0,
-            "roi": pnl / staked if staked else 0}
+            "win_rate": wins / n if n else 0, "avg_entry": avg,
+            "edge": (wins / n - avg) if n else 0, "roi": pnl / staked if staked else 0}
 
 
 def money(x: float) -> str:
     return f"{'+' if x > 0 else '−' if x < 0 else ''}${abs(x):,.2f}"
 
 
-def line(name: str, st: dict) -> str:
+def row(name: str, st: dict) -> str:
     if not st["n"]:
-        return f"| {name} | 0 | – | – | – | – |"
+        return f"| {name} | 0 | – | – | – | – | – |"
     return (f"| {name} | {st['n']} | {st['win_rate']*100:.0f}% | {st['avg_entry']*100:.0f}¢ | "
-            f"{money(st['pnl'])} | {st['roi']*100:+.1f}% |")
+            f"{st['edge']*100:+.0f} pts | {money(st['pnl'])} | {st['roi']*100:+.1f}% |")
 
 
-def report() -> str:
-    cache = json.loads(CACHE.read_text())
-    games = list(cache["games"].values())
-    usable = [g for g in games if "fav_pre" in g and "tip" in g]
-    dates = sorted(g["date"] for g in games)
-    skips = {}
+HEAD = ["| | Trades | Won | Avg buy | Edge | P&L | ROI |", "|---|---|---|---|---|---|---|"]
+
+
+def load(sport_key: str) -> tuple[list[dict], list[dict]]:
+    games = list(json.loads(cache_path(sport_key).read_text())["games"].values())
+    return games, [g for g in games if "fav_pre" in g and "tip" in g]
+
+
+def report(sport_key: str) -> str:
+    sport = SPORTS[sport_key]
+    ep = sport["early_periods"]
+    games, usable = load(sport_key)
+    dates = sorted(g["date"] for g in games) or ["–"]
+    skips: dict[str, int] = {}
     for g in games:
         if g.get("skip"):
             k = g["skip"].split(":")[0]
             skips[k] = skips.get(k, 0) + 1
 
-    out = [f"# Favorite-dip backtest — {dates[0]} to {dates[-1]}", "",
-           f"{len(games)} games found, {len(usable)} with full price + timing data"
+    th, dip = config.FAVORITE_MIN_PREGAME, config.DIP_SIZE
+    fav = [g for g in usable if g["fav_pre"] >= th]
+    trades = [t for t in (simulate(g, dip, ep) for g in fav) if t]
+    out = [f"# {sport['name']} — favorite-dip backtest, {dates[0]} to {dates[-1]}", "",
+           f"{len(games)} finished games, {len(usable)} with Kalshi prices + play timing"
            + (f" (skipped: {', '.join(f'{v} {k}' for k, v in skips.items())})" if skips else "") + ".",
-           f"{config.CONTRACTS} contracts per trade, buying at the ask + Kalshi taker fee, held to the final buzzer.", ""]
+           f"{config.CONTRACTS} contracts per trade, buying at the ask + taker fee, held to the end. "
+           f"\"Early\" = period 1–{ep}.", "",
+           f"## Live rule: favorite ≥{th*100:.0f}¢, buy a {dip*100:.0f}¢+ dip ({len(fav)} games had such a favorite)", "",
+           *HEAD,
+           row("Early dips (strategy)", stats([t for t in trades if t["bucket"] == "early"])),
+           row("Late dips (control)", stats([t for t in trades if t["bucket"] == "late"]))]
+    for p in sorted({t["period"] for t in trades}):
+        out.append(row(f"…bought in period {p}", stats([t for t in trades if t["period"] == p])))
 
-    # main rule
-    fav = [g for g in usable if g["fav_pre"] >= config.FAVORITE_MIN_PREGAME]
-    trades = [t for t in (simulate(g, config.DIP_SIZE) for g in fav) if t]
-    out += [f"## Main rule: favorite ≥{config.FAVORITE_MIN_PREGAME*100:.0f}¢, buy a {config.DIP_SIZE*100:.0f}¢+ dip",
-            f"{len(fav)} games had a favorite at that level.", "",
-            "| Bucket | Trades | Won | Avg buy | P&L | ROI |", "|---|---|---|---|---|---|",
-            line("Early (Q1–Q2) — strategy", stats([t for t in trades if t["bucket"] == "early"])),
-            line("Late (Q3–Q4) — control", stats([t for t in trades if t["bucket"] == "late"])),
-            line("All", stats(trades)), "",
-            "A buy has an edge when **Won %** is higher than **Avg buy** (the price is the market's implied chance).", ""]
-
-    # baseline: just buy the favorite at tip
     base = []
     for g in fav:
-        first = next(((b, a) for ts, b, a in g.get("candles", []) if ts and ts >= g["tip"] and a), None)
-        if first:
-            a = first[1]
+        a = next((a for ts, b, a in g.get("candles", []) if ts and ts >= g["tip"] and a), None)
+        if a:
             fee = strategy.taker_fee(config.CONTRACTS, a)
-            cost = a * config.CONTRACTS + fee
             won = g["winner"] == g["fav"]
-            base.append({"entry": a, "cost": cost, "won": won, "pnl": (config.CONTRACTS if won else 0) - cost})
-    out += ["## Baseline: just buy the favorite at tip-off", "",
-            "| Rule | Trades | Won | Avg buy | P&L | ROI |", "|---|---|---|---|---|---|",
-            line("Buy favorite at tip", stats(base)), ""]
-
-    # sensitivity grid
-    out += ["## Variations (early-dip P&L / late-dip P&L, trades in brackets)", "",
-            "| Favorite ≥ \\ dip | 15¢ | 20¢ | 25¢ | 30¢ |", "|---|---|---|---|---|"]
-    for th in (0.65, 0.70, 0.75, 0.80):
+            base.append({"entry": a, "cost": a * config.CONTRACTS + fee, "won": won,
+                         "pnl": (config.CONTRACTS if won else 0) - a * config.CONTRACTS - fee})
+    out += [row("Baseline: buy every favorite at the start", stats(base)), "",
+            "**Edge** = how often the team won minus the price paid. Positive means the market underpriced it.", "",
+            "## Variations — early dips: P&L [trades]", "",
+            "| Favorite ≥ \\ dip | 10¢ | 15¢ | 20¢ | 25¢ |", "|---|---|---|---|---|"]
+    for t2 in (0.60, 0.65, 0.70, 0.75, 0.80):
         cells = []
-        for dip in (0.15, 0.20, 0.25, 0.30):
-            ts = [t for t in (simulate(g, dip) for g in usable if g["fav_pre"] >= th) if t]
+        for d2 in (0.10, 0.15, 0.20, 0.25):
+            ts = [t for t in (simulate(g, d2, ep) for g in usable if g["fav_pre"] >= t2) if t]
             e = stats([t for t in ts if t["bucket"] == "early"])
-            l = stats([t for t in ts if t["bucket"] == "late"])
-            cells.append(f"{money(e['pnl'])} [{e['n']}] / {money(l['pnl'])} [{l['n']}]")
-        out.append(f"| {th*100:.0f}¢ | " + " | ".join(cells) + " |")
-    out.append("")
+            cells.append(f"{money(e['pnl'])} [{e['n']}]")
+        out.append(f"| {t2*100:.0f}¢ | " + " | ".join(cells) + " |")
 
-    # trade list for the main rule
-    out += ["## Every trade (main rule)", "", "| Date | Team | vs | Pre-game | Bought | Min after tip | Bucket | Result | P&L |",
-            "|---|---|---|---|---|---|---|---|---|"]
+    out += ["", "## Every trade (live rule)", "",
+            "| Date | Team | vs | Pre-game | Bought | Period | Result | P&L |", "|---|---|---|---|---|---|---|---|"]
     for t in sorted(trades, key=lambda t: t["date"]):
         out.append(f"| {t['date']} | {t['fav']} | {t['opp']} | {t['fav_pre']*100:.0f}¢ | {t['entry']*100:.0f}¢ | "
-                   f"{t['minute']} | {t['bucket']} | {'✅ won' if t['won'] else '❌ lost'} | {money(t['pnl'])} |")
-
+                   f"{t['period']} | {'✅' if t['won'] else '❌'} | {money(t['pnl'])} |")
     text = "\n".join(out) + "\n"
-    REPORT.write_text(text)
-    with TRADES.open("w", newline="") as f:
-        if trades:
-            w = csv.DictWriter(f, fieldnames=list(trades[0]))
-            w.writeheader()
-            w.writerows(trades)
+    (OUT / f"{sport_key}_report.md").write_text(text)
+    return text
+
+
+def summary() -> str:
+    th, dip = config.FAVORITE_MIN_PREGAME, config.DIP_SIZE
+    out = [f"# All sports — favorite ≥{th*100:.0f}¢, {dip*100:.0f}¢+ dip, {config.CONTRACTS} contracts", "",
+           "| Sport | Bucket | Trades | Won | Avg buy | Edge | P&L | ROI |", "|---|---|---|---|---|---|---|---|"]
+    for key, sport in SPORTS.items():
+        if not cache_path(key).exists():
+            continue
+        _, usable = load(key)
+        ts = [t for t in (simulate(g, dip, sport["early_periods"]) for g in usable if g["fav_pre"] >= th) if t]
+        for b in ("early", "late"):
+            st = stats([t for t in ts if t["bucket"] == b])
+            out.append(f"| {sport['name']} ({len(usable)} games) | {b} " + row("", st)[3:])
+    text = "\n".join(out) + "\n"
+    (OUT / "summary.md").write_text(text)
     return text
 
 
 if __name__ == "__main__":
-    cmd = sys.argv[1] if len(sys.argv) > 1 else "report"
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "summary"
     if cmd == "fetch":
-        fetch(date.fromisoformat(sys.argv[2]), date.fromisoformat(sys.argv[3]))
+        fetch(sys.argv[2], date.fromisoformat(sys.argv[3]), date.fromisoformat(sys.argv[4]))
+    elif cmd == "report":
+        print(report(sys.argv[2]))
     else:
-        print(report())
+        print(summary())

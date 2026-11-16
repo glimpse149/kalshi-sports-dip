@@ -3,25 +3,25 @@ name: backtest
 on:
   workflow_dispatch:
     inputs:
-      start:
-        description: "First date (YYYY-MM-DD)"
+      sports:
+        description: 'Sports as JSON list, e.g. ["nba","nfl","ncaaf","nhl","ncaamb"]'
         required: true
-        default: "2026-10-20"
+        default: '["nba","nfl","ncaaf","nhl","ncaamb"]'
       end:
-        description: "Last date (YYYY-MM-DD)"
+        description: "Last date (YYYY-MM-DD); each sport starts at its season start"
         required: true
 
 permissions:
   contents: write
 
-concurrency:
-  group: backtest
-  cancel-in-progress: false
-
 jobs:
   backtest:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        sport: ${{ fromJSON(inputs.sports) }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,12 +30,40 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python -m bot.backtest fetch ${{ inputs.start }} ${{ inputs.end }}
-      - run: python -m bot.backtest report
+      - name: Fetch
+        run: |
+          START=$(python -c "from bot.sports import SPORTS; print(SPORTS['${{ matrix.sport }}']['season_start'])")
+          python -m bot.backtest fetch ${{ matrix.sport }} $START ${{ inputs.end }}
+      - run: python -m bot.backtest report ${{ matrix.sport }}
       - name: Save results
         if: always()
         run: |
           git config user.name "dip-bot"
           git config user.email "dip-bot@users.noreply.github.com"
-          git add data
-          git diff --cached --quiet || (git commit -m "backtest ${{ inputs.start }}..${{ inputs.end }}" && git pull --rebase && git push)
+          git add data/backtest
+          git diff --cached --quiet && exit 0
+          git commit -m "backtest ${{ matrix.sport }} to ${{ inputs.end }}"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && exit 0; sleep $((RANDOM % 10 + 5)); done
+          exit 1
+
+  summary:
+    needs: backtest
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m bot.backtest summary
+      - name: Save summary
+        run: |
+          git config user.name "dip-bot"
+          git config user.email "dip-bot@users.noreply.github.com"
+          git add data/backtest
+          git diff --cached --quiet && exit 0
+          git commit -m "backtest summary"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
