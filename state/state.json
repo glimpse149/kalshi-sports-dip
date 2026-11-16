@@ -169,6 +169,108 @@
    "entered": [],
    "espn_id": "401909980",
    "date": "2026-11-14"
+  },
+  "KXNBAGAME-26NOV15OKCSAC": {
+   "pregame": {
+    "SAC": 0.165,
+    "OKC": 0.845
+   },
+   "favorite": "OKC",
+   "fav_pregame": 0.845,
+   "entered": [],
+   "espn_id": "401909993",
+   "date": "2026-11-15"
+  },
+  "KXNBAGAME-26NOV15ATLMIL": {
+   "pregame": {
+    "MIL": 0.255,
+    "ATL": 0.755
+   },
+   "favorite": "ATL",
+   "fav_pregame": 0.755,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909992",
+   "date": "2026-11-15"
+  },
+  "KXNBAGAME-26NOV15SASUTA": {
+   "pregame": {
+    "UTA": 0.105,
+    "SAS": 0.895
+   },
+   "favorite": "SAS",
+   "fav_pregame": 0.895,
+   "entered": [
+    "late"
+   ],
+   "espn_id": "401909988",
+   "date": "2026-11-15",
+   "lookup_tries": 1,
+   "pregame_source": "history"
+  },
+  "KXNBAGAME-26NOV15CHALAC": {
+   "pregame": {
+    "LAC": 0.515,
+    "CHA": 0.485
+   },
+   "favorite": "",
+   "fav_pregame": 0.515,
+   "entered": [],
+   "espn_id": "401909987",
+   "date": "2026-11-15",
+   "lookup_tries": 1,
+   "pregame_source": "history"
+  },
+  "KXNBAGAME-26NOV15HOUWAS": {
+   "pregame": {
+    "WAS": 0.245,
+    "HOU": 0.755
+   },
+   "favorite": "HOU",
+   "fav_pregame": 0.755,
+   "entered": [],
+   "espn_id": "401909991",
+   "date": "2026-11-15"
+  },
+  "KXNBAGAME-26NOV15NYKTOR": {
+   "pregame": {
+    "TOR": 0.395,
+    "NYK": 0.605
+   },
+   "favorite": "",
+   "fav_pregame": 0.605,
+   "entered": [],
+   "espn_id": "401909990",
+   "date": "2026-11-15",
+   "lookup_tries": 1,
+   "pregame_source": "history"
+  },
+  "KXNBAGAME-26NOV15LALPHX": {
+   "pregame": {
+    "PHX": 0.385,
+    "LAL": 0.615
+   },
+   "favorite": "",
+   "fav_pregame": 0.615,
+   "entered": [],
+   "espn_id": "401909986",
+   "date": "2026-11-15",
+   "lookup_tries": 1,
+   "pregame_source": "history"
+  },
+  "KXNBAGAME-26NOV15DALBOS": {
+   "pregame": {
+    "DAL": 0.125,
+    "BOS": 0.885
+   },
+   "favorite": "BOS",
+   "fav_pregame": 0.885,
+   "entered": [],
+   "espn_id": "401909989",
+   "date": "2026-11-15",
+   "lookup_tries": 1,
+   "pregame_source": "history"
   }
  },
  "open": [],
@@ -260,6 +362,50 @@
    "payout": 0.0,
    "pnl": -36.71,
    "closed_at": "2026-11-15T03:26:34+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV15SASUTA",
+   "ticker": "KXNBAGAME-26NOV15SASUTA-SAS",
+   "date": "2026-11-15",
+   "espn_id": "401909988",
+   "team": "SAS",
+   "opponent": "UTA",
+   "bucket": "late",
+   "pregame": 0.895,
+   "entry": 0.73,
+   "contracts": 50,
+   "fee": 0.69,
+   "cost": 37.19,
+   "period": 3,
+   "clock": "26.0",
+   "score": "SAS 79-81 UTA",
+   "opened_at": "2026-11-15T23:43:55+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 12.81,
+   "closed_at": "2026-11-16T00:22:07+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV15ATLMIL",
+   "ticker": "KXNBAGAME-26NOV15ATLMIL-ATL",
+   "date": "2026-11-15",
+   "espn_id": "401909992",
+   "team": "ATL",
+   "opponent": "MIL",
+   "bucket": "early",
+   "pregame": 0.755,
+   "entry": 0.6,
+   "contracts": 50,
+   "fee": 0.84,
+   "cost": 30.84,
+   "period": 1,
+   "clock": "6:13",
+   "score": "ATL 9-15 MIL",
+   "opened_at": "2026-11-16T01:18:50+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 19.16,
+   "closed_at": "2026-11-16T03:26:32+00:00"
   }
  ],
  "last_summary": "Sat Nov 14"
