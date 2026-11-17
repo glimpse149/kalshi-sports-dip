@@ -1,5 +1,39 @@
 {
- "games": {},
+ "games": {
+  "KXNCAAFGAME-26NOV17MOHKENT": {
+   "pregame": {
+    "M-OH": 0.765,
+    "KENT": 0.235
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866466",
+   "date": "2026-11-17"
+  },
+  "KXNCAAFGAME-26NOV17EMUWMU": {
+   "pregame": {
+    "WMU": 0.875,
+    "EMU": 0.125
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866465",
+   "date": "2026-11-17"
+  },
+  "KXNCAAFGAME-26NOV17BALLOHIO": {
+   "pregame": {
+    "OHIO": 0.785,
+    "BALL": 0.215
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866464",
+   "date": "2026-11-17"
+  }
+ },
  "open": [],
  "closed": []
 }
