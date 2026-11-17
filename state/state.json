@@ -263,6 +263,100 @@
    "date": "2026-11-15",
    "lookup_tries": 1,
    "pregame_source": "history"
+  },
+  "KXNBAGAME-26NOV16HOUMIA": {
+   "pregame": {
+    "MIA": 0.495,
+    "HOU": 0.505
+   },
+   "favorite": "",
+   "fav_pregame": 0.505,
+   "entered": [],
+   "espn_id": "401909998",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16PHIBKN": {
+   "pregame": {
+    "PHI": 0.665,
+    "BKN": 0.335
+   },
+   "favorite": "",
+   "fav_pregame": 0.665,
+   "entered": [],
+   "espn_id": "401909997",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16PHXDEN": {
+   "pregame": {
+    "PHX": 0.205,
+    "DEN": 0.795
+   },
+   "favorite": "DEN",
+   "fav_pregame": 0.795,
+   "entered": [
+    "late"
+   ],
+   "espn_id": "401910001",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16MEMWAS": {
+   "pregame": {
+    "WAS": 0.405,
+    "MEM": 0.605
+   },
+   "favorite": "",
+   "fav_pregame": 0.605,
+   "entered": [],
+   "espn_id": "401909996",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16CHICLE": {
+   "pregame": {
+    "CLE": 0.735,
+    "CHI": 0.265
+   },
+   "favorite": "CLE",
+   "fav_pregame": 0.735,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909995",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16PORMIN": {
+   "pregame": {
+    "POR": 0.465,
+    "MIN": 0.535
+   },
+   "favorite": "",
+   "fav_pregame": 0.535,
+   "entered": [],
+   "espn_id": "401909999",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16GSWNOP": {
+   "pregame": {
+    "NOP": 0.395,
+    "GSW": 0.605
+   },
+   "favorite": "",
+   "fav_pregame": 0.605,
+   "entered": [],
+   "espn_id": "401910000",
+   "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV16ORLBOS": {
+   "pregame": {
+    "ORL": 0.235,
+    "BOS": 0.765
+   },
+   "favorite": "BOS",
+   "fav_pregame": 0.765,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909994",
+   "date": "2026-11-16"
   }
  },
  "open": [],
@@ -398,6 +492,72 @@
    "payout": 50.0,
    "pnl": 19.16,
    "closed_at": "2026-11-16T03:26:32+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV16ORLBOS",
+   "ticker": "KXNBAGAME-26NOV16ORLBOS-BOS",
+   "date": "2026-11-16",
+   "espn_id": "401909994",
+   "team": "BOS",
+   "opponent": "ORL",
+   "bucket": "early",
+   "pregame": 0.765,
+   "entry": 0.61,
+   "contracts": 50,
+   "fee": 0.84,
+   "cost": 31.34,
+   "period": 2,
+   "clock": "2:37",
+   "score": "BOS 38-43 ORL",
+   "opened_at": "2026-11-17T01:02:35+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -31.34,
+   "closed_at": "2026-11-17T02:33:19+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV16CHICLE",
+   "ticker": "KXNBAGAME-26NOV16CHICLE-CLE",
+   "date": "2026-11-16",
+   "espn_id": "401909995",
+   "team": "CLE",
+   "opponent": "CHI",
+   "bucket": "early",
+   "pregame": 0.735,
+   "entry": 0.58,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.86,
+   "period": 2,
+   "clock": "11:38",
+   "score": "CLE 25-31 CHI",
+   "opened_at": "2026-11-17T00:36:30+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 20.14,
+   "closed_at": "2026-11-17T02:34:20+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV16PHXDEN",
+   "ticker": "KXNBAGAME-26NOV16PHXDEN-DEN",
+   "date": "2026-11-16",
+   "espn_id": "401910001",
+   "team": "DEN",
+   "opponent": "PHX",
+   "bucket": "late",
+   "pregame": 0.795,
+   "entry": 0.58,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.86,
+   "period": 3,
+   "clock": "11:29",
+   "score": "DEN 53-59 PHX",
+   "opened_at": "2026-11-17T03:29:25+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -29.86,
+   "closed_at": "2026-11-17T04:26:03+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
