@@ -256,26 +256,7 @@
    "date": "2026-11-17"
   }
  },
- "open": [
-  {
-   "event": "KXNBAGAME-26NOV17CHALAL",
-   "ticker": "KXNBAGAME-26NOV17CHALAL-LAL",
-   "date": "2026-11-17",
-   "espn_id": "401910005",
-   "team": "LAL",
-   "opponent": "CHA",
-   "bucket": "early",
-   "pregame": 0.725,
-   "entry": 0.57,
-   "contracts": 50,
-   "fee": 0.86,
-   "cost": 29.36,
-   "period": 2,
-   "clock": "11:36",
-   "score": "LAL 30-34 CHA",
-   "opened_at": "2026-11-18T04:47:42+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -496,6 +477,28 @@
    "payout": 0.0,
    "pnl": -29.86,
    "closed_at": "2026-11-18T03:34:05+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV17CHALAL",
+   "ticker": "KXNBAGAME-26NOV17CHALAL-LAL",
+   "date": "2026-11-17",
+   "espn_id": "401910005",
+   "team": "LAL",
+   "opponent": "CHA",
+   "bucket": "early",
+   "pregame": 0.725,
+   "entry": 0.57,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.36,
+   "period": 2,
+   "clock": "11:36",
+   "score": "LAL 30-34 CHA",
+   "opened_at": "2026-11-18T04:47:42+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 20.64,
+   "closed_at": "2026-11-18T07:02:42+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
