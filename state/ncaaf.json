@@ -34,6 +34,28 @@
    ],
    "espn_id": "401866464",
    "date": "2026-11-17"
+  },
+  "KXNCAAFGAME-26NOV18CMUBUFF": {
+   "pregame": {
+    "CMU": 0.435,
+    "BUFF": 0.565
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866469",
+   "date": "2026-11-18"
+  },
+  "KXNCAAFGAME-26NOV18AKRMASS": {
+   "pregame": {
+    "MASS": 0.615,
+    "AKR": 0.385
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866467",
+   "date": "2026-11-18"
   }
  },
  "open": [],
