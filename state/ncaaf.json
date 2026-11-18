@@ -2,22 +2,22 @@
  "games": {
   "KXNCAAFGAME-26NOV17MOHKENT": {
    "pregame": {
-    "M-OH": 0.765,
-    "KENT": 0.235
+    "M-OH": 0.755,
+    "KENT": 0.245
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "M-OH",
+   "fav_pregame": 0.755,
    "entered": [],
    "espn_id": "401866466",
    "date": "2026-11-17"
   },
   "KXNCAAFGAME-26NOV17EMUWMU": {
    "pregame": {
-    "WMU": 0.875,
-    "EMU": 0.125
+    "WMU": 0.895,
+    "EMU": 0.105
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "WMU",
+   "fav_pregame": 0.895,
    "entered": [],
    "espn_id": "401866465",
    "date": "2026-11-17"
@@ -27,13 +27,38 @@
     "OHIO": 0.785,
     "BALL": 0.215
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "OHIO",
+   "fav_pregame": 0.785,
+   "entered": [
+    "late"
+   ],
    "espn_id": "401866464",
    "date": "2026-11-17"
   }
  },
  "open": [],
- "closed": []
+ "closed": [
+  {
+   "event": "KXNCAAFGAME-26NOV17BALLOHIO",
+   "ticker": "KXNCAAFGAME-26NOV17BALLOHIO-OHIO",
+   "date": "2026-11-17",
+   "espn_id": "401866464",
+   "team": "OHIO",
+   "opponent": "BALL",
+   "bucket": "late",
+   "pregame": 0.785,
+   "entry": 0.63,
+   "contracts": 50,
+   "fee": 0.82,
+   "cost": 32.32,
+   "period": 2,
+   "clock": "4:28",
+   "score": "OHIO 7-10 BALL",
+   "opened_at": "2026-11-18T01:01:23+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 17.68,
+   "closed_at": "2026-11-18T03:25:24+00:00"
+  }
+ ]
 }
