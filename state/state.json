@@ -1,64 +1,5 @@
 {
  "games": {
-  "KXNBAGAME-26NOV14CHIMIN": {
-   "pregame": {
-    "MIN": 0.885,
-    "CHI": 0.115
-   },
-   "favorite": "MIN",
-   "fav_pregame": 0.885,
-   "entered": [
-    "early"
-   ],
-   "espn_id": "401909984",
-   "date": "2026-11-14"
-  },
-  "KXNBAGAME-26NOV14DALCLE": {
-   "pregame": {
-    "DAL": 0.775,
-    "CLE": 0.225
-   },
-   "favorite": "DAL",
-   "fav_pregame": 0.775,
-   "entered": [
-    "early"
-   ],
-   "espn_id": "401909981",
-   "date": "2026-11-14"
-  },
-  "KXNBAGAME-26NOV14DETMIA": {
-   "pregame": {
-    "MIA": 0.405,
-    "DET": 0.595
-   },
-   "favorite": "",
-   "fav_pregame": 0.595,
-   "entered": [],
-   "espn_id": "401909982",
-   "date": "2026-11-14"
-  },
-  "KXNBAGAME-26NOV14BKNMEM": {
-   "pregame": {
-    "MEM": 0.615,
-    "BKN": 0.375
-   },
-   "favorite": "",
-   "fav_pregame": 0.615,
-   "entered": [],
-   "espn_id": "401909983",
-   "date": "2026-11-14"
-  },
-  "KXNBAGAME-26NOV14DENNOP": {
-   "pregame": {
-    "NOP": 0.155,
-    "DEN": 0.845
-   },
-   "favorite": "DEN",
-   "fav_pregame": 0.845,
-   "entered": [],
-   "espn_id": "401909980",
-   "date": "2026-11-14"
-  },
   "KXNBAGAME-26NOV15OKCSAC": {
    "pregame": {
     "SAC": 0.165,
@@ -254,9 +195,87 @@
    ],
    "espn_id": "401909994",
    "date": "2026-11-16"
+  },
+  "KXNBAGAME-26NOV17PORMIN": {
+   "pregame": {
+    "POR": 0.385,
+    "MIN": 0.615
+   },
+   "favorite": "",
+   "fav_pregame": 0.615,
+   "entered": [],
+   "espn_id": "401910003",
+   "date": "2026-11-17"
+  },
+  "KXNBAGAME-26NOV17NYKTOR": {
+   "pregame": {
+    "TOR": 0.445,
+    "NYK": 0.555
+   },
+   "favorite": "",
+   "fav_pregame": 0.555,
+   "entered": [],
+   "espn_id": "401910002",
+   "date": "2026-11-17"
+  },
+  "KXNBAGAME-26NOV17UTALAC": {
+   "pregame": {
+    "UTA": 0.325,
+    "LAC": 0.675
+   },
+   "favorite": "",
+   "fav_pregame": 0.675,
+   "entered": [],
+   "espn_id": "401910006",
+   "date": "2026-11-17"
+  },
+  "KXNBAGAME-26NOV17CHALAL": {
+   "pregame": {
+    "LAL": 0.725,
+    "CHA": 0.275
+   },
+   "favorite": "LAL",
+   "fav_pregame": 0.725,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401910005",
+   "date": "2026-11-17"
+  },
+  "KXNBAGAME-26NOV17DETSAS": {
+   "pregame": {
+    "SAS": 0.785,
+    "DET": 0.215
+   },
+   "favorite": "SAS",
+   "fav_pregame": 0.785,
+   "entered": [
+    "late"
+   ],
+   "espn_id": "401910004",
+   "date": "2026-11-17"
   }
  },
- "open": [],
+ "open": [
+  {
+   "event": "KXNBAGAME-26NOV17CHALAL",
+   "ticker": "KXNBAGAME-26NOV17CHALAL-LAL",
+   "date": "2026-11-17",
+   "espn_id": "401910005",
+   "team": "LAL",
+   "opponent": "CHA",
+   "bucket": "early",
+   "pregame": 0.725,
+   "entry": 0.57,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.36,
+   "period": 2,
+   "clock": "11:36",
+   "score": "LAL 30-34 CHA",
+   "opened_at": "2026-11-18T04:47:42+00:00"
+  }
+ ],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -455,6 +474,28 @@
    "payout": 0.0,
    "pnl": -29.86,
    "closed_at": "2026-11-17T04:26:03+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV17DETSAS",
+   "ticker": "KXNBAGAME-26NOV17DETSAS-SAS",
+   "date": "2026-11-17",
+   "espn_id": "401910004",
+   "team": "SAS",
+   "opponent": "DET",
+   "bucket": "late",
+   "pregame": 0.785,
+   "entry": 0.58,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.86,
+   "period": 3,
+   "clock": "3:59",
+   "score": "SAS 66-70 DET",
+   "opened_at": "2026-11-18T02:44:55+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -29.86,
+   "closed_at": "2026-11-18T03:34:05+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
