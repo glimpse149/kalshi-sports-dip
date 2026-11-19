@@ -37,22 +37,22 @@
   },
   "KXNCAAFGAME-26NOV18CMUBUFF": {
    "pregame": {
-    "CMU": 0.435,
+    "CMU": 0.425,
     "BUFF": 0.565
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.565,
    "entered": [],
    "espn_id": "401866469",
    "date": "2026-11-18"
   },
   "KXNCAAFGAME-26NOV18AKRMASS": {
    "pregame": {
-    "MASS": 0.615,
-    "AKR": 0.385
+    "MASS": 0.585,
+    "AKR": 0.415
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.585,
    "entered": [],
    "espn_id": "401866467",
    "date": "2026-11-18"
