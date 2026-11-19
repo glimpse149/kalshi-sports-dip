@@ -166,6 +166,10 @@ def main() -> None:
     positions = json.loads(POSITIONS.read_text())
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     today = datetime.now(timezone.utc).date()
+    active = [p for p in positions if date.fromisoformat(p["expiry"]) >= today]
+    if not active:
+        print("No open positions in positions.json; nothing to send.")
+        return
 
     quotes = {}
     for p in positions:

@@ -69,7 +69,7 @@ python -m bot settle
 
 `options_watch/` sends a Monday ~10:47am ET message to the same *updates* Telegram bot
 on the Robinhood option positions listed in `options_watch/positions.json`
-(currently SKM $40 Call Dec 18; FSLY closed Nov 18 for +$270): stock price and weekly change,
+(currently none: FSLY closed Nov 18 for +$270; it stays quiet until a trade is added): stock price and weekly change,
 option value vs what was paid, breakeven, days left, and flags when the take-profit,
 cut-loss or planned exit date is reached. Quotes come from Yahoo Finance.
 Edit `positions.json` to change fill prices, contracts or add/remove trades.
