@@ -290,26 +290,7 @@
    "date": "2026-11-18"
   }
  },
- "open": [
-  {
-   "event": "KXNBAGAME-26NOV18UTALAL",
-   "ticker": "KXNBAGAME-26NOV18UTALAL-LAL",
-   "date": "2026-11-18",
-   "espn_id": "401910017",
-   "team": "LAL",
-   "opponent": "UTA",
-   "bucket": "early",
-   "pregame": 0.825,
-   "entry": 0.66,
-   "contracts": 50,
-   "fee": 0.79,
-   "cost": 33.79,
-   "period": 2,
-   "clock": "1:41",
-   "score": "LAL 50-54 UTA",
-   "opened_at": "2026-11-19T04:08:43+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -574,6 +555,28 @@
    "payout": 0.0,
    "pnl": -27.38,
    "closed_at": "2026-11-19T03:17:32+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV18UTALAL",
+   "ticker": "KXNBAGAME-26NOV18UTALAL-LAL",
+   "date": "2026-11-18",
+   "espn_id": "401910017",
+   "team": "LAL",
+   "opponent": "UTA",
+   "bucket": "early",
+   "pregame": 0.825,
+   "entry": 0.66,
+   "contracts": 50,
+   "fee": 0.79,
+   "cost": 33.79,
+   "period": 2,
+   "clock": "1:41",
+   "score": "LAL 50-54 UTA",
+   "opened_at": "2026-11-19T04:08:43+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -33.79,
+   "closed_at": "2026-11-19T05:32:04+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
