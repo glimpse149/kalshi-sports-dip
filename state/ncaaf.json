@@ -56,6 +56,17 @@
    "entered": [],
    "espn_id": "401866467",
    "date": "2026-11-18"
+  },
+  "KXNCAAFGAME-26NOV19RICETEM": {
+   "pregame": {
+    "TEM": 0.565,
+    "RICE": 0.435
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401862830",
+   "date": "2026-11-19"
   }
  },
  "open": [],
