@@ -292,26 +292,7 @@
    "date": "2026-11-20"
   }
  },
- "open": [
-  {
-   "event": "KXNBAGAME-26NOV20SACLAL",
-   "ticker": "KXNBAGAME-26NOV20SACLAL-LAL",
-   "date": "2026-11-20",
-   "espn_id": "401909313",
-   "team": "LAL",
-   "opponent": "SAC",
-   "bucket": "early",
-   "pregame": 0.865,
-   "entry": 0.66,
-   "contracts": 50,
-   "fee": 0.79,
-   "cost": 33.79,
-   "period": 2,
-   "clock": "2:26",
-   "score": "LAL 47-54 SAC",
-   "opened_at": "2026-11-21T04:01:08+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -708,6 +689,28 @@
    "payout": 50.0,
    "pnl": 16.7,
    "closed_at": "2026-11-21T03:25:31+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV20SACLAL",
+   "ticker": "KXNBAGAME-26NOV20SACLAL-LAL",
+   "date": "2026-11-20",
+   "espn_id": "401909313",
+   "team": "LAL",
+   "opponent": "SAC",
+   "bucket": "early",
+   "pregame": 0.865,
+   "entry": 0.66,
+   "contracts": 50,
+   "fee": 0.79,
+   "cost": 33.79,
+   "period": 2,
+   "clock": "2:26",
+   "score": "LAL 47-54 SAC",
+   "opened_at": "2026-11-21T04:01:08+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 16.21,
+   "closed_at": "2026-11-21T05:23:43+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
