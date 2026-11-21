@@ -1,40 +1,5 @@
 {
  "games": {
-  "KXNCAAFGAME-26NOV17MOHKENT": {
-   "pregame": {
-    "M-OH": 0.755,
-    "KENT": 0.245
-   },
-   "favorite": "M-OH",
-   "fav_pregame": 0.755,
-   "entered": [],
-   "espn_id": "401866466",
-   "date": "2026-11-17"
-  },
-  "KXNCAAFGAME-26NOV17EMUWMU": {
-   "pregame": {
-    "WMU": 0.895,
-    "EMU": 0.105
-   },
-   "favorite": "WMU",
-   "fav_pregame": 0.895,
-   "entered": [],
-   "espn_id": "401866465",
-   "date": "2026-11-17"
-  },
-  "KXNCAAFGAME-26NOV17BALLOHIO": {
-   "pregame": {
-    "OHIO": 0.785,
-    "BALL": 0.215
-   },
-   "favorite": "OHIO",
-   "fav_pregame": 0.785,
-   "entered": [
-    "late"
-   ],
-   "espn_id": "401866464",
-   "date": "2026-11-17"
-  },
   "KXNCAAFGAME-26NOV18CMUBUFF": {
    "pregame": {
     "CMU": 0.425,
@@ -137,26 +102,7 @@
    "date": "2026-11-20"
   }
  },
- "open": [
-  {
-   "event": "KXNCAAFGAME-26NOV20CLEMDUKE",
-   "ticker": "KXNCAAFGAME-26NOV20CLEMDUKE-DUKE",
-   "date": "2026-11-20",
-   "espn_id": "401858303",
-   "team": "DUKE",
-   "opponent": "CLEM",
-   "bucket": "late",
-   "pregame": 0.805,
-   "entry": 0.64,
-   "contracts": 50,
-   "fee": 0.81,
-   "cost": 32.81,
-   "period": 2,
-   "clock": "8:27",
-   "score": "DUKE 0-0 CLEM",
-   "opened_at": "2026-11-21T01:34:51+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
@@ -179,6 +125,28 @@
    "payout": 50.0,
    "pnl": 17.68,
    "closed_at": "2026-11-18T03:25:24+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV20CLEMDUKE",
+   "ticker": "KXNCAAFGAME-26NOV20CLEMDUKE-DUKE",
+   "date": "2026-11-20",
+   "espn_id": "401858303",
+   "team": "DUKE",
+   "opponent": "CLEM",
+   "bucket": "late",
+   "pregame": 0.805,
+   "entry": 0.64,
+   "contracts": 50,
+   "fee": 0.81,
+   "cost": 32.81,
+   "period": 2,
+   "clock": "8:27",
+   "score": "DUKE 0-0 CLEM",
+   "opened_at": "2026-11-21T01:34:51+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -32.81,
+   "closed_at": "2026-11-21T04:06:08+00:00"
   }
  ]
 }
