@@ -70,22 +70,22 @@
   },
   "KXNCAAFGAME-26NOV20UNMWYO": {
    "pregame": {
-    "WYO": 0.235,
-    "UNM": 0.765
+    "WYO": 0.225,
+    "UNM": 0.775
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "UNM",
+   "fav_pregame": 0.775,
    "entered": [],
    "espn_id": "401864542",
    "date": "2026-11-20"
   },
   "KXNCAAFGAME-26NOV20OREMSU": {
    "pregame": {
-    "ORE": 0.895,
-    "MSU": 0.105
+    "ORE": 0.915,
+    "MSU": 0.085
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "ORE",
+   "fav_pregame": 0.915,
    "entered": [],
    "espn_id": "401858529",
    "date": "2026-11-20"
@@ -93,49 +93,70 @@
   "KXNCAAFGAME-26NOV20UTEPAFA": {
    "pregame": {
     "UTEP": 0.065,
-    "AFA": 0.935
+    "AFA": 0.945
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "AFA",
+   "fav_pregame": 0.945,
    "entered": [],
    "espn_id": "401864545",
    "date": "2026-11-20"
   },
   "KXNCAAFGAME-26NOV20BGSUTOL": {
    "pregame": {
-    "TOL": 0.865,
-    "BGSU": 0.135
+    "TOL": 0.875,
+    "BGSU": 0.125
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "TOL",
+   "fav_pregame": 0.875,
    "entered": [],
    "espn_id": "401866468",
    "date": "2026-11-20"
   },
   "KXNCAAFGAME-26NOV20CLEMDUKE": {
    "pregame": {
-    "DUKE": 0.815,
-    "CLEM": 0.185
+    "DUKE": 0.805,
+    "CLEM": 0.195
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "DUKE",
+   "fav_pregame": 0.805,
+   "entered": [
+    "late"
+   ],
    "espn_id": "401858303",
    "date": "2026-11-20"
   },
   "KXNCAAFGAME-26NOV20ISUUCF": {
    "pregame": {
-    "UCF": 0.475,
-    "ISU": 0.525
+    "UCF": 0.455,
+    "ISU": 0.545
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.545,
    "entered": [],
    "espn_id": "401856869",
    "date": "2026-11-20"
   }
  },
- "open": [],
+ "open": [
+  {
+   "event": "KXNCAAFGAME-26NOV20CLEMDUKE",
+   "ticker": "KXNCAAFGAME-26NOV20CLEMDUKE-DUKE",
+   "date": "2026-11-20",
+   "espn_id": "401858303",
+   "team": "DUKE",
+   "opponent": "CLEM",
+   "bucket": "late",
+   "pregame": 0.805,
+   "entry": 0.64,
+   "contracts": 50,
+   "fee": 0.81,
+   "cost": 32.81,
+   "period": 2,
+   "clock": "8:27",
+   "score": "DUKE 0-0 CLEM",
+   "opened_at": "2026-11-21T01:34:51+00:00"
+  }
+ ],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
