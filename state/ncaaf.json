@@ -1,27 +1,5 @@
 {
  "games": {
-  "KXNCAAFGAME-26NOV18CMUBUFF": {
-   "pregame": {
-    "CMU": 0.425,
-    "BUFF": 0.565
-   },
-   "favorite": "",
-   "fav_pregame": 0.565,
-   "entered": [],
-   "espn_id": "401866469",
-   "date": "2026-11-18"
-  },
-  "KXNCAAFGAME-26NOV18AKRMASS": {
-   "pregame": {
-    "MASS": 0.585,
-    "AKR": 0.415
-   },
-   "favorite": "",
-   "fav_pregame": 0.585,
-   "entered": [],
-   "espn_id": "401866467",
-   "date": "2026-11-18"
-  },
   "KXNCAAFGAME-26NOV19RICETEM": {
    "pregame": {
     "TEM": 0.565,
@@ -145,7 +123,9 @@
    },
    "favorite": "ORST",
    "fav_pregame": 0.7,
-   "entered": [],
+   "entered": [
+    "early"
+   ],
    "espn_id": "401860919",
    "date": "2026-11-21"
   },
@@ -156,7 +136,9 @@
    },
    "favorite": "BOIS",
    "fav_pregame": 0.915,
-   "entered": [],
+   "entered": [
+    "late"
+   ],
    "espn_id": "401860925",
    "date": "2026-11-21"
   },
@@ -612,7 +594,9 @@
    },
    "favorite": "UTA",
    "fav_pregame": 0.755,
-   "entered": [],
+   "entered": [
+    "late"
+   ],
    "espn_id": "401856872",
    "date": "2026-11-21"
   },
@@ -766,26 +750,7 @@
    "date": "2026-11-21"
   }
  },
- "open": [
-  {
-   "event": "KXNCAAFGAME-26NOV21ARIZKSU",
-   "ticker": "KXNCAAFGAME-26NOV21ARIZKSU-ARIZ",
-   "date": "2026-11-21",
-   "espn_id": "401856865",
-   "team": "ARIZ",
-   "opponent": "KSU",
-   "bucket": "late",
-   "pregame": 0.765,
-   "entry": 0.59,
-   "contracts": 50,
-   "fee": 0.85,
-   "cost": 30.35,
-   "period": 3,
-   "clock": "5:34",
-   "score": "ARIZ 17-20 KSU",
-   "opened_at": "2026-11-22T02:34:28+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
@@ -1094,6 +1059,94 @@
    "payout": 50.0,
    "pnl": 10.88,
    "closed_at": "2026-11-22T03:33:22+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21ARIZKSU",
+   "ticker": "KXNCAAFGAME-26NOV21ARIZKSU-ARIZ",
+   "date": "2026-11-21",
+   "espn_id": "401856865",
+   "team": "ARIZ",
+   "opponent": "KSU",
+   "bucket": "late",
+   "pregame": 0.765,
+   "entry": 0.59,
+   "contracts": 50,
+   "fee": 0.85,
+   "cost": 30.35,
+   "period": 3,
+   "clock": "5:34",
+   "score": "ARIZ 17-20 KSU",
+   "opened_at": "2026-11-22T02:34:28+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 19.65,
+   "closed_at": "2026-11-22T04:06:20+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21UTAHTCU",
+   "ticker": "KXNCAAFGAME-26NOV21UTAHTCU-UTAH",
+   "date": "2026-11-21",
+   "espn_id": "401856872",
+   "team": "UTA",
+   "opponent": "TCU",
+   "bucket": "late",
+   "pregame": 0.755,
+   "entry": 0.59,
+   "contracts": 50,
+   "fee": 0.85,
+   "cost": 30.35,
+   "period": 4,
+   "clock": "12:11",
+   "score": "UTA 17-14 TCU",
+   "opened_at": "2026-11-22T05:12:12+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 19.65,
+   "closed_at": "2026-11-22T05:56:26+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21SDSUBSU",
+   "ticker": "KXNCAAFGAME-26NOV21SDSUBSU-BSU",
+   "date": "2026-11-21",
+   "espn_id": "401860925",
+   "team": "BOIS",
+   "opponent": "SDSU",
+   "bucket": "late",
+   "pregame": 0.915,
+   "entry": 0.75,
+   "contracts": 50,
+   "fee": 0.66,
+   "cost": 38.16,
+   "period": 4,
+   "clock": "1:51",
+   "score": "BOIS 20-19 SDSU",
+   "opened_at": "2026-11-22T05:57:27+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -38.16,
+   "closed_at": "2026-11-22T06:10:32+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21USUORST",
+   "ticker": "KXNCAAFGAME-26NOV21USUORST-ORST",
+   "date": "2026-11-21",
+   "espn_id": "401860919",
+   "team": "ORST",
+   "opponent": "USU",
+   "bucket": "early",
+   "pregame": 0.7,
+   "entry": 0.54,
+   "contracts": 50,
+   "fee": 0.87,
+   "cost": 27.87,
+   "period": 1,
+   "clock": "6:53",
+   "score": "ORST 0-7 USU",
+   "opened_at": "2026-11-22T04:07:20+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 22.13,
+   "closed_at": "2026-11-22T07:03:50+00:00"
   }
  ]
 }
