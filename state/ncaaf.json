@@ -103,12 +103,14 @@
   },
   "KXNCAAFGAME-26NOV21VTMIA": {
    "pregame": {
-    "VT": 0.085,
-    "MIA": 0.915
+    "VT": 0.075,
+    "MIA": 0.925
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "MIA",
+   "fav_pregame": 0.925,
+   "entered": [
+    "early"
+   ],
    "espn_id": "401858302",
    "date": "2026-11-21"
   },
@@ -138,11 +140,11 @@
   },
   "KXNCAAFGAME-26NOV21USUORST": {
    "pregame": {
-    "USU": 0.285,
-    "ORST": 0.705
+    "USU": 0.295,
+    "ORST": 0.7
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "ORST",
+   "fav_pregame": 0.7,
    "entered": [],
    "espn_id": "401860919",
    "date": "2026-11-21"
@@ -150,10 +152,10 @@
   "KXNCAAFGAME-26NOV21SDSUBSU": {
    "pregame": {
     "SDSU": 0.085,
-    "BOIS": 0.905
+    "BOIS": 0.915
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "BOIS",
+   "fav_pregame": 0.915,
    "entered": [],
    "espn_id": "401860925",
    "date": "2026-11-21"
@@ -163,8 +165,8 @@
     "SMU": 0.095,
     "ND": 0.905
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "ND",
+   "fav_pregame": 0.905,
    "entered": [],
    "espn_id": "401858307",
    "date": "2026-11-21"
@@ -172,21 +174,21 @@
   "KXNCAAFGAME-26NOV21CSUFRES": {
    "pregame": {
     "FRES": 0.915,
-    "CSU": 0.085
+    "CSU": 0.095
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "FRES",
+   "fav_pregame": 0.915,
    "entered": [],
    "espn_id": "401860918",
    "date": "2026-11-21"
   },
   "KXNCAAFGAME-26NOV21UNLVSJSU": {
    "pregame": {
-    "UNLV": 0.685,
+    "UNLV": 0.675,
     "SJSU": 0.325
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.675,
    "entered": [],
    "espn_id": "401864544",
    "date": "2026-11-21"
@@ -196,9 +198,11 @@
     "WSU": 0.165,
     "TXST": 0.835
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "TXST",
+   "fav_pregame": 0.835,
+   "entered": [
+    "early"
+   ],
    "espn_id": "401860920",
    "date": "2026-11-21"
   },
@@ -327,11 +331,11 @@
   },
   "KXNCAAFGAME-26NOV21ARSTLT": {
    "pregame": {
-    "LT": 0.845,
-    "ARST": 0.155
+    "LT": 0.835,
+    "ARST": 0.175
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "LT",
+   "fav_pregame": 0.835,
    "entered": [],
    "espn_id": "401869938",
    "date": "2026-11-21"
@@ -384,11 +388,11 @@
   },
   "KXNCAAFGAME-26NOV21HAWNEV": {
    "pregame": {
-    "NEV": 0.705,
-    "HAW": 0.295
+    "NEV": 0.715,
+    "HAW": 0.285
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "NEV",
+   "fav_pregame": 0.715,
    "entered": [],
    "espn_id": "401864541",
    "date": "2026-11-21"
@@ -411,7 +415,9 @@
    },
    "favorite": "PSU",
    "fav_pregame": 0.955,
-   "entered": [],
+   "entered": [
+    "late"
+   ],
    "espn_id": "401858532",
    "date": "2026-11-21"
   },
@@ -453,9 +459,11 @@
     "USC": 0.895,
     "MD": 0.105
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "USC",
+   "fav_pregame": 0.895,
+   "entered": [
+    "late"
+   ],
    "espn_id": "401858534",
    "date": "2026-11-21"
   },
@@ -466,7 +474,9 @@
    },
    "favorite": "IU",
    "fav_pregame": 0.755,
-   "entered": [],
+   "entered": [
+    "late"
+   ],
    "espn_id": "401858535",
    "date": "2026-11-21"
   },
@@ -494,11 +504,11 @@
   },
   "KXNCAAFGAME-26NOV21PITTLOU": {
    "pregame": {
-    "PITT": 0.185,
-    "LOU": 0.805
+    "PITT": 0.215,
+    "LOU": 0.785
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "LOU",
+   "fav_pregame": 0.785,
    "entered": [],
    "espn_id": "401858306",
    "date": "2026-11-21"
@@ -532,8 +542,8 @@
     "STAN": 0.565,
     "CAL": 0.435
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.565,
    "entered": [],
    "espn_id": "401858308",
    "date": "2026-11-21"
@@ -554,9 +564,11 @@
     "KSU": 0.235,
     "ARIZ": 0.765
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "ARIZ",
+   "fav_pregame": 0.765,
+   "entered": [
+    "late"
+   ],
    "espn_id": "401856865",
    "date": "2026-11-21"
   },
@@ -598,8 +610,8 @@
     "UTA": 0.755,
     "TCU": 0.245
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "UTA",
+   "fav_pregame": 0.755,
    "entered": [],
    "espn_id": "401856872",
    "date": "2026-11-21"
@@ -617,11 +629,11 @@
   },
   "KXNCAAFGAME-26NOV21OKSTASU": {
    "pregame": {
-    "OKST": 0.555,
-    "ASU": 0.445
+    "OKST": 0.615,
+    "ASU": 0.385
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.615,
    "entered": [],
    "espn_id": "401856870",
    "date": "2026-11-21"
@@ -642,8 +654,8 @@
     "UGA": 0.865,
     "SC": 0.135
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "UGA",
+   "fav_pregame": 0.865,
    "entered": [],
    "espn_id": "401856753",
    "date": "2026-11-21"
@@ -653,8 +665,8 @@
     "UK": 0.355,
     "MIZ": 0.645
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.645,
    "entered": [],
    "espn_id": "401856751",
    "date": "2026-11-21"
@@ -677,8 +689,8 @@
     "UTSA": 0.625,
     "UAB": 0.375
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.625,
    "entered": [],
    "espn_id": "401862836",
    "date": "2026-11-21"
@@ -756,94 +768,22 @@
  },
  "open": [
   {
-   "event": "KXNCAAFGAME-26NOV21CHARTLSA",
-   "ticker": "KXNCAAFGAME-26NOV21CHARTLSA-TLSA",
+   "event": "KXNCAAFGAME-26NOV21ARIZKSU",
+   "ticker": "KXNCAAFGAME-26NOV21ARIZKSU-ARIZ",
    "date": "2026-11-21",
-   "espn_id": "401862832",
-   "team": "TLSA",
-   "opponent": "CLT",
+   "espn_id": "401856865",
+   "team": "ARIZ",
+   "opponent": "KSU",
    "bucket": "late",
-   "pregame": 0.935,
-   "entry": 0.78,
+   "pregame": 0.765,
+   "entry": 0.59,
    "contracts": 50,
-   "fee": 0.61,
-   "cost": 39.61,
-   "period": 2,
-   "clock": "11:01",
-   "score": "TLSA 0-6 CLT",
-   "opened_at": "2026-11-21T19:54:00+00:00"
-  },
-  {
-   "event": "KXNCAAFGAME-26NOV21MOSUJVST",
-   "ticker": "KXNCAAFGAME-26NOV21MOSUJVST-JVST",
-   "date": "2026-11-21",
-   "espn_id": "401871079",
-   "team": "JXST",
-   "opponent": "MOST",
-   "bucket": "late",
-   "pregame": 0.8,
-   "entry": 0.58,
-   "contracts": 50,
-   "fee": 0.86,
-   "cost": 29.86,
-   "period": 2,
-   "clock": "8:51",
-   "score": "JXST 3-9 MOST",
-   "opened_at": "2026-11-21T19:57:03+00:00"
-  },
-  {
-   "event": "KXNCAAFGAME-26NOV21ULMAPP",
-   "ticker": "KXNCAAFGAME-26NOV21ULMAPP-APP",
-   "date": "2026-11-21",
-   "espn_id": "401869929",
-   "team": "APP",
-   "opponent": "ULM",
-   "bucket": "late",
-   "pregame": 0.835,
-   "entry": 0.68,
-   "contracts": 50,
-   "fee": 0.77,
-   "cost": 34.77,
-   "period": 2,
-   "clock": "9:30",
-   "score": "APP 0-0 ULM",
-   "opened_at": "2026-11-21T20:17:14+00:00"
-  },
-  {
-   "event": "KXNCAAFGAME-26NOV21NCSTFSU",
-   "ticker": "KXNCAAFGAME-26NOV21NCSTFSU-FSU",
-   "date": "2026-11-21",
-   "espn_id": "401858304",
-   "team": "FSU",
-   "opponent": "NCSU",
-   "bucket": "late",
-   "pregame": 0.785,
-   "entry": 0.61,
-   "contracts": 50,
-   "fee": 0.84,
-   "cost": 31.34,
-   "period": 2,
-   "clock": "7:41",
-   "score": "FSU 7-7 NCSU",
-   "opened_at": "2026-11-21T21:38:22+00:00"
-  },
-  {
-   "event": "KXNCAAFGAME-26NOV21TXAMOKLA",
-   "ticker": "KXNCAAFGAME-26NOV21TXAMOKLA-OKLA",
-   "date": "2026-11-21",
-   "espn_id": "401856752",
-   "team": "OU",
-   "opponent": "TA&M",
-   "bucket": "late",
-   "pregame": 0.715,
-   "entry": 0.52,
-   "contracts": 50,
-   "fee": 0.88,
-   "cost": 26.88,
-   "period": 2,
-   "clock": "12:00",
-   "score": "OU 0-7 TA&M",
-   "opened_at": "2026-11-21T21:42:24+00:00"
+   "fee": 0.85,
+   "cost": 30.35,
+   "period": 3,
+   "clock": "5:34",
+   "score": "ARIZ 17-20 KSU",
+   "opened_at": "2026-11-22T02:34:28+00:00"
   }
  ],
  "closed": [
@@ -934,6 +874,226 @@
    "payout": 50.0,
    "pnl": 16.21,
    "closed_at": "2026-11-21T20:32:52+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21MOSUJVST",
+   "ticker": "KXNCAAFGAME-26NOV21MOSUJVST-JVST",
+   "date": "2026-11-21",
+   "espn_id": "401871079",
+   "team": "JXST",
+   "opponent": "MOST",
+   "bucket": "late",
+   "pregame": 0.8,
+   "entry": 0.58,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.86,
+   "period": 2,
+   "clock": "8:51",
+   "score": "JXST 3-9 MOST",
+   "opened_at": "2026-11-21T19:57:03+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 20.14,
+   "closed_at": "2026-11-21T22:15:55+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21CHARTLSA",
+   "ticker": "KXNCAAFGAME-26NOV21CHARTLSA-TLSA",
+   "date": "2026-11-21",
+   "espn_id": "401862832",
+   "team": "TLSA",
+   "opponent": "CLT",
+   "bucket": "late",
+   "pregame": 0.935,
+   "entry": 0.78,
+   "contracts": 50,
+   "fee": 0.61,
+   "cost": 39.61,
+   "period": 2,
+   "clock": "11:01",
+   "score": "TLSA 0-6 CLT",
+   "opened_at": "2026-11-21T19:54:00+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 10.39,
+   "closed_at": "2026-11-21T22:29:03+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21ULMAPP",
+   "ticker": "KXNCAAFGAME-26NOV21ULMAPP-APP",
+   "date": "2026-11-21",
+   "espn_id": "401869929",
+   "team": "APP",
+   "opponent": "ULM",
+   "bucket": "late",
+   "pregame": 0.835,
+   "entry": 0.68,
+   "contracts": 50,
+   "fee": 0.77,
+   "cost": 34.77,
+   "period": 2,
+   "clock": "9:30",
+   "score": "APP 0-0 ULM",
+   "opened_at": "2026-11-21T20:17:14+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 15.23,
+   "closed_at": "2026-11-21T22:37:38+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21NCSTFSU",
+   "ticker": "KXNCAAFGAME-26NOV21NCSTFSU-FSU",
+   "date": "2026-11-21",
+   "espn_id": "401858304",
+   "team": "FSU",
+   "opponent": "NCSU",
+   "bucket": "late",
+   "pregame": 0.785,
+   "entry": 0.61,
+   "contracts": 50,
+   "fee": 0.84,
+   "cost": 31.34,
+   "period": 2,
+   "clock": "7:41",
+   "score": "FSU 7-7 NCSU",
+   "opened_at": "2026-11-21T21:38:22+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -31.34,
+   "closed_at": "2026-11-22T00:00:24+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21RUTGPSU",
+   "ticker": "KXNCAAFGAME-26NOV21RUTGPSU-PSU",
+   "date": "2026-11-21",
+   "espn_id": "401858532",
+   "team": "PSU",
+   "opponent": "RUTG",
+   "bucket": "late",
+   "pregame": 0.955,
+   "entry": 0.71,
+   "contracts": 50,
+   "fee": 0.73,
+   "cost": 36.23,
+   "period": 4,
+   "clock": "0:06",
+   "score": "PSU 24-17 RUTG",
+   "opened_at": "2026-11-22T00:08:28+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -36.23,
+   "closed_at": "2026-11-22T00:14:01+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21INDWASH",
+   "ticker": "KXNCAAFGAME-26NOV21INDWASH-IND",
+   "date": "2026-11-21",
+   "espn_id": "401858535",
+   "team": "IU",
+   "opponent": "WASH",
+   "bucket": "late",
+   "pregame": 0.755,
+   "entry": 0.56,
+   "contracts": 50,
+   "fee": 0.87,
+   "cost": 28.87,
+   "period": 3,
+   "clock": "14:17",
+   "score": "IU 14-14 WASH",
+   "opened_at": "2026-11-21T22:33:35+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -28.87,
+   "closed_at": "2026-11-22T00:14:32+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21TXAMOKLA",
+   "ticker": "KXNCAAFGAME-26NOV21TXAMOKLA-OKLA",
+   "date": "2026-11-21",
+   "espn_id": "401856752",
+   "team": "OU",
+   "opponent": "TA&M",
+   "bucket": "late",
+   "pregame": 0.715,
+   "entry": 0.52,
+   "contracts": 50,
+   "fee": 0.88,
+   "cost": 26.88,
+   "period": 2,
+   "clock": "12:00",
+   "score": "OU 0-7 TA&M",
+   "opened_at": "2026-11-21T21:42:24+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 23.12,
+   "closed_at": "2026-11-22T00:16:03+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21WSUTXST",
+   "ticker": "KXNCAAFGAME-26NOV21WSUTXST-TXST",
+   "date": "2026-11-21",
+   "espn_id": "401860920",
+   "team": "TXST",
+   "opponent": "WSU",
+   "bucket": "early",
+   "pregame": 0.835,
+   "entry": 0.68,
+   "contracts": 50,
+   "fee": 0.77,
+   "cost": 34.77,
+   "period": 1,
+   "clock": "11:40",
+   "score": "TXST 0-6 WSU",
+   "opened_at": "2026-11-21T23:19:01+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 15.23,
+   "closed_at": "2026-11-22T02:20:53+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21MDUSC",
+   "ticker": "KXNCAAFGAME-26NOV21MDUSC-USC",
+   "date": "2026-11-21",
+   "espn_id": "401858534",
+   "team": "USC",
+   "opponent": "MD",
+   "bucket": "late",
+   "pregame": 0.895,
+   "entry": 0.74,
+   "contracts": 50,
+   "fee": 0.68,
+   "cost": 37.68,
+   "period": 3,
+   "clock": "14:48",
+   "score": "USC 13-14 MD",
+   "opened_at": "2026-11-22T01:11:56+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 12.32,
+   "closed_at": "2026-11-22T02:35:59+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV21VTMIA",
+   "ticker": "KXNCAAFGAME-26NOV21VTMIA-MIA",
+   "date": "2026-11-21",
+   "espn_id": "401858302",
+   "team": "MIA",
+   "opponent": "VT",
+   "bucket": "early",
+   "pregame": 0.925,
+   "entry": 0.77,
+   "contracts": 50,
+   "fee": 0.62,
+   "cost": 39.12,
+   "period": 1,
+   "clock": "6:02",
+   "score": "MIA 0-7 VT",
+   "opened_at": "2026-11-22T00:23:37+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 10.88,
+   "closed_at": "2026-11-22T03:33:22+00:00"
   }
  ]
 }
