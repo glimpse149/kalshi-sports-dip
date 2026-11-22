@@ -213,26 +213,7 @@
    "date": "2026-11-21"
   }
  },
- "open": [
-  {
-   "event": "KXNBAGAME-26NOV21BOSSAC",
-   "ticker": "KXNBAGAME-26NOV21BOSSAC-BOS",
-   "date": "2026-11-21",
-   "espn_id": "401910028",
-   "team": "BOS",
-   "opponent": "SAC",
-   "bucket": "late",
-   "pregame": 0.805,
-   "entry": 0.65,
-   "contracts": 50,
-   "fee": 0.8,
-   "cost": 33.3,
-   "period": 3,
-   "clock": "3:37",
-   "score": "BOS 63-64 SAC",
-   "opened_at": "2026-11-22T04:47:24+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -651,6 +632,28 @@
    "payout": 50.0,
    "pnl": 16.21,
    "closed_at": "2026-11-21T05:23:43+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV21BOSSAC",
+   "ticker": "KXNBAGAME-26NOV21BOSSAC-BOS",
+   "date": "2026-11-21",
+   "espn_id": "401910028",
+   "team": "BOS",
+   "opponent": "SAC",
+   "bucket": "late",
+   "pregame": 0.805,
+   "entry": 0.65,
+   "contracts": 50,
+   "fee": 0.8,
+   "cost": 33.3,
+   "period": 3,
+   "clock": "3:37",
+   "score": "BOS 63-64 SAC",
+   "opened_at": "2026-11-22T04:47:24+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -33.3,
+   "closed_at": "2026-11-22T05:39:47+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
