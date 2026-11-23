@@ -211,6 +211,78 @@
    "entered": [],
    "espn_id": "401910025",
    "date": "2026-11-21"
+  },
+  "KXNBAGAME-26NOV22INDNYK": {
+   "pregame": {
+    "NYK": 0.685,
+    "IND": 0.315
+   },
+   "favorite": "",
+   "fav_pregame": 0.685,
+   "entered": [],
+   "espn_id": "401910034",
+   "date": "2026-11-22"
+  },
+  "KXNBAGAME-26NOV22DALUTA": {
+   "pregame": {
+    "UTA": 0.435,
+    "DAL": 0.565
+   },
+   "favorite": "",
+   "fav_pregame": 0.565,
+   "entered": [],
+   "espn_id": "401910033",
+   "date": "2026-11-22"
+  },
+  "KXNBAGAME-26NOV22ORLWAS": {
+   "pregame": {
+    "WAS": 0.355,
+    "ORL": 0.645
+   },
+   "favorite": "",
+   "fav_pregame": 0.645,
+   "entered": [],
+   "espn_id": "401910031",
+   "date": "2026-11-22"
+  },
+  "KXNBAGAME-26NOV22DENCHI": {
+   "pregame": {
+    "DEN": 0.775,
+    "CHI": 0.225
+   },
+   "favorite": "DEN",
+   "fav_pregame": 0.775,
+   "entered": [
+    "late"
+   ],
+   "espn_id": "401910032",
+   "date": "2026-11-22"
+  },
+  "KXNBAGAME-26NOV22BOSGSW": {
+   "pregame": {
+    "GSW": 0.255,
+    "BOS": 0.745
+   },
+   "favorite": "BOS",
+   "fav_pregame": 0.745,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401910035",
+   "date": "2026-11-22"
+  },
+  "KXNBAGAME-26NOV22OKCMIA": {
+   "pregame": {
+    "OKC": 0.375,
+    "MIA": 0.625
+   },
+   "favorite": "",
+   "fav_pregame": 0.625,
+   "entered": [],
+   "espn_id": "401910030",
+   "date": "2026-11-22",
+   "lookup_tries": 1,
+   "pregame_source": "history"
   }
  },
  "open": [],
@@ -654,6 +726,50 @@
    "payout": 0.0,
    "pnl": -33.3,
    "closed_at": "2026-11-22T05:39:47+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV22DENCHI",
+   "ticker": "KXNBAGAME-26NOV22DENCHI-DEN",
+   "date": "2026-11-22",
+   "espn_id": "401910032",
+   "team": "DEN",
+   "opponent": "CHI",
+   "bucket": "late",
+   "pregame": 0.775,
+   "entry": 0.57,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.36,
+   "period": 4,
+   "clock": "7:34",
+   "score": "DEN 110-111 CHI",
+   "opened_at": "2026-11-23T02:00:40+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 20.64,
+   "closed_at": "2026-11-23T02:40:19+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV22BOSGSW",
+   "ticker": "KXNBAGAME-26NOV22BOSGSW-BOS",
+   "date": "2026-11-22",
+   "espn_id": "401910035",
+   "team": "BOS",
+   "opponent": "GSW",
+   "bucket": "early",
+   "pregame": 0.745,
+   "entry": 0.57,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.36,
+   "period": 1,
+   "clock": "2:26",
+   "score": "BOS 15-23 GSW",
+   "opened_at": "2026-11-23T02:01:41+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -29.36,
+   "closed_at": "2026-11-23T04:00:04+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
