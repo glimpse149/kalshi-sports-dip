@@ -1,16 +1,5 @@
 {
  "games": {
-  "KXNCAAFGAME-26NOV19RICETEM": {
-   "pregame": {
-    "TEM": 0.565,
-    "RICE": 0.445
-   },
-   "favorite": "",
-   "fav_pregame": 0.565,
-   "entered": [],
-   "espn_id": "401862830",
-   "date": "2026-11-19"
-  },
   "KXNCAAFGAME-26NOV20UNMWYO": {
    "pregame": {
     "WYO": 0.225,
