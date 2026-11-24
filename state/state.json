@@ -250,44 +250,7 @@
    "date": "2026-11-23"
   }
  },
- "open": [
-  {
-   "event": "KXNBAGAME-26NOV23SASSAC",
-   "ticker": "KXNBAGAME-26NOV23SASSAC-SAS",
-   "date": "2026-11-23",
-   "espn_id": "401910045",
-   "team": "SAS",
-   "opponent": "SAC",
-   "bucket": "early",
-   "pregame": 0.725,
-   "entry": 0.57,
-   "contracts": 50,
-   "fee": 0.86,
-   "cost": 29.36,
-   "period": 1,
-   "clock": "1:51",
-   "score": "SAS 16-24 SAC",
-   "opened_at": "2026-11-24T03:32:24+00:00"
-  },
-  {
-   "event": "KXNBAGAME-26NOV23UTALAL",
-   "ticker": "KXNBAGAME-26NOV23UTALAL-LAL",
-   "date": "2026-11-23",
-   "espn_id": "401910044",
-   "team": "LAL",
-   "opponent": "UTA",
-   "bucket": "late",
-   "pregame": 0.845,
-   "entry": 0.69,
-   "contracts": 50,
-   "fee": 0.75,
-   "cost": 35.25,
-   "period": 3,
-   "clock": "3:50",
-   "score": "LAL 65-67 UTA",
-   "opened_at": "2026-11-24T04:47:34+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNBAGAME-26NOV13NYKIND",
@@ -838,6 +801,50 @@
    "payout": 50.0,
    "pnl": 14.75,
    "closed_at": "2026-11-24T03:50:57+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV23SASSAC",
+   "ticker": "KXNBAGAME-26NOV23SASSAC-SAS",
+   "date": "2026-11-23",
+   "espn_id": "401910045",
+   "team": "SAS",
+   "opponent": "SAC",
+   "bucket": "early",
+   "pregame": 0.725,
+   "entry": 0.57,
+   "contracts": 50,
+   "fee": 0.86,
+   "cost": 29.36,
+   "period": 1,
+   "clock": "1:51",
+   "score": "SAS 16-24 SAC",
+   "opened_at": "2026-11-24T03:32:24+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 20.64,
+   "closed_at": "2026-11-24T05:24:24+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV23UTALAL",
+   "ticker": "KXNBAGAME-26NOV23UTALAL-LAL",
+   "date": "2026-11-23",
+   "espn_id": "401910044",
+   "team": "LAL",
+   "opponent": "UTA",
+   "bucket": "late",
+   "pregame": 0.845,
+   "entry": 0.69,
+   "contracts": 50,
+   "fee": 0.75,
+   "cost": 35.25,
+   "period": 3,
+   "clock": "3:50",
+   "score": "LAL 65-67 UTA",
+   "opened_at": "2026-11-24T04:47:34+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 14.75,
+   "closed_at": "2026-11-24T05:35:57+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
