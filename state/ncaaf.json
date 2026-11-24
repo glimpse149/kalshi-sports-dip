@@ -1,73 +1,5 @@
 {
  "games": {
-  "KXNCAAFGAME-26NOV20UNMWYO": {
-   "pregame": {
-    "WYO": 0.225,
-    "UNM": 0.775
-   },
-   "favorite": "UNM",
-   "fav_pregame": 0.775,
-   "entered": [],
-   "espn_id": "401864542",
-   "date": "2026-11-20"
-  },
-  "KXNCAAFGAME-26NOV20OREMSU": {
-   "pregame": {
-    "ORE": 0.915,
-    "MSU": 0.085
-   },
-   "favorite": "ORE",
-   "fav_pregame": 0.915,
-   "entered": [],
-   "espn_id": "401858529",
-   "date": "2026-11-20"
-  },
-  "KXNCAAFGAME-26NOV20UTEPAFA": {
-   "pregame": {
-    "UTEP": 0.065,
-    "AFA": 0.945
-   },
-   "favorite": "AFA",
-   "fav_pregame": 0.945,
-   "entered": [],
-   "espn_id": "401864545",
-   "date": "2026-11-20"
-  },
-  "KXNCAAFGAME-26NOV20BGSUTOL": {
-   "pregame": {
-    "TOL": 0.875,
-    "BGSU": 0.125
-   },
-   "favorite": "TOL",
-   "fav_pregame": 0.875,
-   "entered": [],
-   "espn_id": "401866468",
-   "date": "2026-11-20"
-  },
-  "KXNCAAFGAME-26NOV20CLEMDUKE": {
-   "pregame": {
-    "DUKE": 0.805,
-    "CLEM": 0.195
-   },
-   "favorite": "DUKE",
-   "fav_pregame": 0.805,
-   "entered": [
-    "late"
-   ],
-   "espn_id": "401858303",
-   "date": "2026-11-20"
-  },
-  "KXNCAAFGAME-26NOV20ISUUCF": {
-   "pregame": {
-    "UCF": 0.455,
-    "ISU": 0.545
-   },
-   "favorite": "",
-   "fav_pregame": 0.545,
-   "entered": [],
-   "espn_id": "401856869",
-   "date": "2026-11-20"
-  },
   "KXNCAAFGAME-26NOV21VTMIA": {
    "pregame": {
     "VT": 0.075,
@@ -737,6 +669,28 @@
    "entered": [],
    "espn_id": "401856749",
    "date": "2026-11-21"
+  },
+  "KXNCAAFGAME-26NOV24KENTEMU": {
+   "pregame": {
+    "KENT": 0.325,
+    "EMU": 0.675
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866470",
+   "date": "2026-11-24"
+  },
+  "KXNCAAFGAME-26NOV24MOHWMU": {
+   "pregame": {
+    "WMU": 0.675,
+    "M-OH": 0.335
+   },
+   "favorite": null,
+   "fav_pregame": null,
+   "entered": [],
+   "espn_id": "401866471",
+   "date": "2026-11-24"
   }
  },
  "open": [],
