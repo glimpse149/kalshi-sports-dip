@@ -1,62 +1,5 @@
 {
  "games": {
-  "KXNBAGAME-26NOV21NOPSAS": {
-   "pregame": {
-    "SAS": 0.925,
-    "NOP": 0.075
-   },
-   "favorite": "SAS",
-   "fav_pregame": 0.925,
-   "entered": [],
-   "espn_id": "401910027",
-   "date": "2026-11-21"
-  },
-  "KXNBAGAME-26NOV21MEMMIN": {
-   "pregame": {
-    "MIN": 0.665,
-    "MEM": 0.335
-   },
-   "favorite": "",
-   "fav_pregame": 0.665,
-   "entered": [],
-   "espn_id": "401910026",
-   "date": "2026-11-21"
-  },
-  "KXNBAGAME-26NOV21PORNYK": {
-   "pregame": {
-    "POR": 0.535,
-    "NYK": 0.465
-   },
-   "favorite": "",
-   "fav_pregame": 0.535,
-   "entered": [],
-   "espn_id": "401910024",
-   "date": "2026-11-21"
-  },
-  "KXNBAGAME-26NOV21BOSSAC": {
-   "pregame": {
-    "SAC": 0.195,
-    "BOS": 0.805
-   },
-   "favorite": "BOS",
-   "fav_pregame": 0.805,
-   "entered": [
-    "late"
-   ],
-   "espn_id": "401910028",
-   "date": "2026-11-21"
-  },
-  "KXNBAGAME-26NOV21LACDAL": {
-   "pregame": {
-    "LAC": 0.355,
-    "DAL": 0.645
-   },
-   "favorite": "",
-   "fav_pregame": 0.645,
-   "entered": [],
-   "espn_id": "401910025",
-   "date": "2026-11-21"
-  },
   "KXNBAGAME-26NOV22INDNYK": {
    "pregame": {
     "NYK": 0.685,
@@ -248,6 +191,39 @@
    "entered": [],
    "espn_id": "401910036",
    "date": "2026-11-23"
+  },
+  "KXNBAGAME-26NOV24DALDEN": {
+   "pregame": {
+    "DEN": 0.695,
+    "DAL": 0.305
+   },
+   "favorite": "",
+   "fav_pregame": 0.695,
+   "entered": [],
+   "espn_id": "401909316",
+   "date": "2026-11-24"
+  },
+  "KXNBAGAME-26NOV24BOSWAS": {
+   "pregame": {
+    "WAS": 0.215,
+    "BOS": 0.785
+   },
+   "favorite": "BOS",
+   "fav_pregame": 0.785,
+   "entered": [],
+   "espn_id": "401909315",
+   "date": "2026-11-24"
+  },
+  "KXNBAGAME-26NOV24DETORL": {
+   "pregame": {
+    "ORL": 0.585,
+    "DET": 0.415
+   },
+   "favorite": "",
+   "fav_pregame": 0.585,
+   "entered": [],
+   "espn_id": "401909314",
+   "date": "2026-11-24"
   }
  },
  "open": [],
