@@ -672,22 +672,22 @@
   },
   "KXNCAAFGAME-26NOV24KENTEMU": {
    "pregame": {
-    "KENT": 0.325,
-    "EMU": 0.675
+    "KENT": 0.305,
+    "EMU": 0.695
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.695,
    "entered": [],
    "espn_id": "401866470",
    "date": "2026-11-24"
   },
   "KXNCAAFGAME-26NOV24MOHWMU": {
    "pregame": {
-    "WMU": 0.675,
-    "M-OH": 0.335
+    "WMU": 0.635,
+    "M-OH": 0.365
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "",
+   "fav_pregame": 0.635,
    "entered": [],
    "espn_id": "401866471",
    "date": "2026-11-24"
