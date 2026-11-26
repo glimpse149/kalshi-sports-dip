@@ -1,77 +1,5 @@
 {
  "games": {
-  "KXNBAGAME-26NOV22INDNYK": {
-   "pregame": {
-    "NYK": 0.685,
-    "IND": 0.315
-   },
-   "favorite": "",
-   "fav_pregame": 0.685,
-   "entered": [],
-   "espn_id": "401910034",
-   "date": "2026-11-22"
-  },
-  "KXNBAGAME-26NOV22DALUTA": {
-   "pregame": {
-    "UTA": 0.435,
-    "DAL": 0.565
-   },
-   "favorite": "",
-   "fav_pregame": 0.565,
-   "entered": [],
-   "espn_id": "401910033",
-   "date": "2026-11-22"
-  },
-  "KXNBAGAME-26NOV22ORLWAS": {
-   "pregame": {
-    "WAS": 0.355,
-    "ORL": 0.645
-   },
-   "favorite": "",
-   "fav_pregame": 0.645,
-   "entered": [],
-   "espn_id": "401910031",
-   "date": "2026-11-22"
-  },
-  "KXNBAGAME-26NOV22DENCHI": {
-   "pregame": {
-    "DEN": 0.775,
-    "CHI": 0.225
-   },
-   "favorite": "DEN",
-   "fav_pregame": 0.775,
-   "entered": [
-    "late"
-   ],
-   "espn_id": "401910032",
-   "date": "2026-11-22"
-  },
-  "KXNBAGAME-26NOV22BOSGSW": {
-   "pregame": {
-    "GSW": 0.255,
-    "BOS": 0.745
-   },
-   "favorite": "BOS",
-   "fav_pregame": 0.745,
-   "entered": [
-    "early"
-   ],
-   "espn_id": "401910035",
-   "date": "2026-11-22"
-  },
-  "KXNBAGAME-26NOV22OKCMIA": {
-   "pregame": {
-    "OKC": 0.375,
-    "MIA": 0.625
-   },
-   "favorite": "",
-   "fav_pregame": 0.625,
-   "entered": [],
-   "espn_id": "401910030",
-   "date": "2026-11-22",
-   "lookup_tries": 1,
-   "pregame_source": "history"
-  },
   "KXNBAGAME-26NOV23SASSAC": {
    "pregame": {
     "SAS": 0.725,
@@ -224,6 +152,109 @@
    "entered": [],
    "espn_id": "401909314",
    "date": "2026-11-24"
+  },
+  "KXNBAGAME-26NOV25PHXHOU": {
+   "pregame": {
+    "PHX": 0.245,
+    "HOU": 0.765
+   },
+   "favorite": "HOU",
+   "fav_pregame": 0.765,
+   "entered": [
+    "early"
+   ],
+   "espn_id": "401909323",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25BKNMIL": {
+   "pregame": {
+    "MIL": 0.525,
+    "BKN": 0.485
+   },
+   "favorite": "",
+   "fav_pregame": 0.525,
+   "entered": [],
+   "espn_id": "401909322",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25MINOKC": {
+   "pregame": {
+    "OKC": 0.555,
+    "MIN": 0.455
+   },
+   "favorite": "",
+   "fav_pregame": 0.555,
+   "entered": [],
+   "espn_id": "401909320",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25SASPOR": {
+   "pregame": {
+    "SAS": 0.595,
+    "POR": 0.415
+   },
+   "favorite": "",
+   "fav_pregame": 0.595,
+   "entered": [],
+   "espn_id": "401909325",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25LACMEM": {
+   "pregame": {
+    "MEM": 0.715,
+    "LAC": 0.285
+   },
+   "favorite": "MEM",
+   "fav_pregame": 0.715,
+   "entered": [],
+   "espn_id": "401909321",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25CHICHA": {
+   "pregame": {
+    "CHI": 0.375,
+    "CHA": 0.625
+   },
+   "favorite": "",
+   "fav_pregame": 0.625,
+   "entered": [],
+   "espn_id": "401909318",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25SACGSW": {
+   "pregame": {
+    "SAC": 0.265,
+    "GSW": 0.735
+   },
+   "favorite": "GSW",
+   "fav_pregame": 0.735,
+   "entered": [],
+   "espn_id": "401909324",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25CLENYK": {
+   "pregame": {
+    "NYK": 0.625,
+    "CLE": 0.365
+   },
+   "favorite": "",
+   "fav_pregame": 0.625,
+   "entered": [],
+   "espn_id": "401909319",
+   "date": "2026-11-25"
+  },
+  "KXNBAGAME-26NOV25MIAPHI": {
+   "pregame": {
+    "PHI": 0.505,
+    "MIA": 0.495
+   },
+   "favorite": "",
+   "fav_pregame": 0.505,
+   "entered": [],
+   "espn_id": "401909317",
+   "date": "2026-11-25",
+   "lookup_tries": 1,
+   "pregame_source": "history"
   }
  },
  "open": [],
@@ -821,6 +852,28 @@
    "payout": 50.0,
    "pnl": 14.75,
    "closed_at": "2026-11-24T05:35:57+00:00"
+  },
+  {
+   "event": "KXNBAGAME-26NOV25PHXHOU",
+   "ticker": "KXNBAGAME-26NOV25PHXHOU-HOU",
+   "date": "2026-11-25",
+   "espn_id": "401909323",
+   "team": "HOU",
+   "opponent": "PHX",
+   "bucket": "early",
+   "pregame": 0.765,
+   "entry": 0.61,
+   "contracts": 50,
+   "fee": 0.84,
+   "cost": 31.34,
+   "period": 1,
+   "clock": "40.8",
+   "score": "HOU 27-32 PHX",
+   "opened_at": "2026-11-26T02:13:40+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 18.66,
+   "closed_at": "2026-11-26T04:07:57+00:00"
   }
  ],
  "last_summary": "Sun Nov 15"
