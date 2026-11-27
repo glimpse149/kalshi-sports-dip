@@ -27,14 +27,35 @@
     "TTU": 0.835,
     "TCU": 0.165
    },
-   "favorite": null,
-   "fav_pregame": null,
-   "entered": [],
+   "favorite": "TTU",
+   "fav_pregame": 0.835,
+   "entered": [
+    "early"
+   ],
    "espn_id": "401856879",
    "date": "2026-11-26"
   }
  },
- "open": [],
+ "open": [
+  {
+   "event": "KXNCAAFGAME-26NOV26TCUTTU",
+   "ticker": "KXNCAAFGAME-26NOV26TCUTTU-TTU",
+   "date": "2026-11-26",
+   "espn_id": "401856879",
+   "team": "TTU",
+   "opponent": "TCU",
+   "bucket": "early",
+   "pregame": 0.835,
+   "entry": 0.66,
+   "contracts": 50,
+   "fee": 0.79,
+   "cost": 33.79,
+   "period": 1,
+   "clock": "2:19",
+   "score": "TTU 0-3 TCU",
+   "opened_at": "2026-11-27T01:42:22+00:00"
+  }
+ ],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
