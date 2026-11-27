@@ -36,26 +36,7 @@
    "date": "2026-11-26"
   }
  },
- "open": [
-  {
-   "event": "KXNCAAFGAME-26NOV26TCUTTU",
-   "ticker": "KXNCAAFGAME-26NOV26TCUTTU-TTU",
-   "date": "2026-11-26",
-   "espn_id": "401856879",
-   "team": "TTU",
-   "opponent": "TCU",
-   "bucket": "early",
-   "pregame": 0.835,
-   "entry": 0.66,
-   "contracts": 50,
-   "fee": 0.79,
-   "cost": 33.79,
-   "period": 1,
-   "clock": "2:19",
-   "score": "TTU 0-3 TCU",
-   "opened_at": "2026-11-27T01:42:22+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
@@ -452,6 +433,28 @@
    "payout": 50.0,
    "pnl": 22.13,
    "closed_at": "2026-11-22T07:03:50+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV26TCUTTU",
+   "ticker": "KXNCAAFGAME-26NOV26TCUTTU-TTU",
+   "date": "2026-11-26",
+   "espn_id": "401856879",
+   "team": "TTU",
+   "opponent": "TCU",
+   "bucket": "early",
+   "pregame": 0.835,
+   "entry": 0.66,
+   "contracts": 50,
+   "fee": 0.79,
+   "cost": 33.79,
+   "period": 1,
+   "clock": "2:19",
+   "score": "TTU 0-3 TCU",
+   "opened_at": "2026-11-27T01:42:22+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 16.21,
+   "closed_at": "2026-11-27T04:30:08+00:00"
   }
  ]
 }
