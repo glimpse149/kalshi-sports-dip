@@ -37,11 +37,11 @@
   },
   "KXNCAAFGAME-26NOV27WVUUTAH": {
    "pregame": {
-    "WVU": 0.055,
-    "UTA": 0.945
+    "WVU": 0.065,
+    "UTA": 0.935
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "UTA",
+   "fav_pregame": 0.935,
    "entered": [],
    "espn_id": "401856880",
    "date": "2026-11-27"
@@ -51,19 +51,19 @@
     "WIS": 0.755,
     "MINN": 0.245
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "WIS",
+   "fav_pregame": 0.755,
    "entered": [],
    "espn_id": "401858544",
    "date": "2026-11-27"
   },
   "KXNCAAFGAME-26NOV27TEXTXAM": {
    "pregame": {
-    "TA&M": 0.195,
-    "TEX": 0.805
+    "TA&M": 0.225,
+    "TEX": 0.775
    },
-   "favorite": null,
-   "fav_pregame": null,
+   "favorite": "TEX",
+   "fav_pregame": 0.775,
    "entered": [],
    "espn_id": "401856756",
    "date": "2026-11-27"
@@ -132,7 +132,9 @@
    },
    "favorite": "MEM",
    "fav_pregame": 0.905,
-   "entered": [],
+   "entered": [
+    "late"
+   ],
    "espn_id": "401862838",
    "date": "2026-11-27"
   },
@@ -185,26 +187,7 @@
    "date": "2026-11-27"
   }
  },
- "open": [
-  {
-   "event": "KXNCAAFGAME-26NOV27AFAUNM",
-   "ticker": "KXNCAAFGAME-26NOV27AFAUNM-UNM",
-   "date": "2026-11-27",
-   "espn_id": "401864546",
-   "team": "UNM",
-   "opponent": "AFA",
-   "bucket": "early",
-   "pregame": 0.715,
-   "entry": 0.55,
-   "contracts": 50,
-   "fee": 0.87,
-   "cost": 28.37,
-   "period": 1,
-   "clock": "8:59",
-   "score": "UNM 0-7 AFA",
-   "opened_at": "2026-11-27T21:57:12+00:00"
-  }
- ],
+ "open": [],
  "closed": [
   {
    "event": "KXNCAAFGAME-26NOV17BALLOHIO",
@@ -667,6 +650,50 @@
    "payout": 50.0,
    "pnl": 13.77,
    "closed_at": "2026-11-27T20:25:53+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV27TEMMEM",
+   "ticker": "KXNCAAFGAME-26NOV27TEMMEM-MEM",
+   "date": "2026-11-27",
+   "espn_id": "401862838",
+   "team": "MEM",
+   "opponent": "TEM",
+   "bucket": "late",
+   "pregame": 0.905,
+   "entry": 0.62,
+   "contracts": 50,
+   "fee": 0.83,
+   "cost": 31.83,
+   "period": 4,
+   "clock": "1:58",
+   "score": "MEM 31-28 TEM",
+   "opened_at": "2026-11-27T23:40:20+00:00",
+   "won": false,
+   "payout": 0.0,
+   "pnl": -31.83,
+   "closed_at": "2026-11-27T23:54:54+00:00"
+  },
+  {
+   "event": "KXNCAAFGAME-26NOV27AFAUNM",
+   "ticker": "KXNCAAFGAME-26NOV27AFAUNM-UNM",
+   "date": "2026-11-27",
+   "espn_id": "401864546",
+   "team": "UNM",
+   "opponent": "AFA",
+   "bucket": "early",
+   "pregame": 0.715,
+   "entry": 0.55,
+   "contracts": 50,
+   "fee": 0.87,
+   "cost": 28.37,
+   "period": 1,
+   "clock": "8:59",
+   "score": "UNM 0-7 AFA",
+   "opened_at": "2026-11-27T21:57:12+00:00",
+   "won": true,
+   "payout": 50.0,
+   "pnl": 21.63,
+   "closed_at": "2026-11-28T00:54:38+00:00"
   }
  ]
 }
